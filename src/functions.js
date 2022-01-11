@@ -1,5 +1,9 @@
 export let index = 1;
 export let tasks = [];
+export const main = document.getElementById('main');
+export const listContainer = document.createElement('div');
+listContainer.id = 'list-container';
+listContainer.className = 'd-flex';
 
 function updateIndex(tasks){
   index = 1;
@@ -73,11 +77,12 @@ function addTask(task, index, Trash) {
   input.value = task.description;
   const remove = document.getElementById(`remove-${index}`);
   let fixIndex = index;
-  console.log('probando el boton add');
   remove.addEventListener('click', () => {
     tasks = removeTask(tasks, fixIndex);
     saveTaskArr(tasks);
-    remove.parentElement.remove();
+    let listDiv = document.getElementById('list');
+    listDiv.innerHTML = '';
+    renderTask(tasks, Trash);
   });
   index += 1;
 }
