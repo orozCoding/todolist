@@ -1,14 +1,24 @@
 export let index = 1;
 export let tasks = [];
 
+function updateIndex(tasks){
+  index = 1;
+  tasks.forEach((task) => {
+    task.index = index;
+    index += 1;
+  })
+}
+
 function saveTaskArr(tasks) {
+  localStorage.setItem('taskArr', JSON.stringify(tasks));
+  updateIndex(tasks);
   localStorage.setItem('taskArr', JSON.stringify(tasks));
 }
 
 function checkIndex() {
   if (localStorage.getItem('taskArr')) {
-    let newArr = JSON.parse(localStorage.getItem('taskArr'));
-    index = newArr.length
+    let newArr = JSON.parse(localStorage.getItem('taskArr')); 
+    index = newArr.length + 1;
     localStorage.setItem('index', index)
   } else {
     localStorage.setItem('index', '1');
@@ -21,42 +31,34 @@ function tasksChecker() {
   }
   else {
     return tasks = [{
-      description: 'Finish the project',
+      description: 'You can also edit the text if you click on it!',
       completed: false,
       index: 3,
     },
     {
-      description: 'Buy dinner',
+      description: 'This is an example',
       completed: false,
       index: 1,
     },
     {
-      description: 'Walk the dog',
+      description: 'You can remove the tasks with the right button ->',
       completed: false,
       index: 2,
     },
     {
-      description: 'Help mom with the TV',
+      description: 'Enjoy!',
       completed: false,
       index: 4,
     }];
   }
 }
 
-function updateIndex(tasks){
-  index = 1;
-  tasks.forEach((task) => {
-    task.index = index;
-    index += 1;
-  })
-}
-
 function removeTask(tasks, index) {
-  index = localStorage.getItem('index');
-  index -= 1;
-  localStorage.setItem('index', index);
-  console.log('el nuevo index es ' + index);
-  return tasks.filter(task => task.index !== index);
+  let removing = tasks.filter(task => task.index !== index);
+  let currentIndex = localStorage.getItem('index', index);
+  let newIndex = currentIndex - 1;
+  localStorage.setItem('index', newIndex);
+  return removing;
 }
 
 function addTask(task, index, Trash) {
@@ -71,17 +73,13 @@ function addTask(task, index, Trash) {
   input.value = task.description;
   const remove = document.getElementById(`remove-${index}`);
   let fixIndex = index;
+  console.log('probando el boton add');
   remove.addEventListener('click', () => {
-    console.log('tasks is ' + tasks)
-    console.log('fixIndex ' + fixIndex)
     tasks = removeTask(tasks, fixIndex);
-    console.log(tasks);
     saveTaskArr(tasks);
     remove.parentElement.remove();
   });
   index += 1;
-  console.log('index actual es '+index);
-  localStorage.setItem('index', index);
 }
 
 function renderTask(tasks, Trash) {
@@ -93,7 +91,14 @@ function renderTask(tasks, Trash) {
   });
 }
 
+function reload(tasks, Trash){
+  tasksChecker();
+  renderTask(tasks, Trash);
+  saveTaskArr(tasks);
+  checkIndex();
+}
 
 
 
-export { saveTaskArr, checkIndex, updateIndex, tasksChecker, renderTask, addTask };
+
+export { saveTaskArr, checkIndex, updateIndex, tasksChecker, renderTask, addTask, reload };
