@@ -1,5 +1,25 @@
 import _ from 'lodash';
 import './style.css';
+import Dots from './dots.svg';
+import Enter from './enter.svg';
+import Load from './load.svg';
+
+const main = document.getElementById('main');
+const listContainer= document.createElement('div')
+listContainer.id = 'list-container';
+listContainer.className = 'd-flex';
+
+const dotsIcon = new Image();
+dotsIcon.src = Dots;
+
+const enterIcon = new Image();
+enterIcon.src = Enter;
+
+const loadIcon = new Image();
+loadIcon.src = Load;
+
+main.innerHTML = ``
+
 
 const list = [{
   description: 'Finish the project',
