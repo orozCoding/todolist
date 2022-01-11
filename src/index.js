@@ -1,7 +1,8 @@
 import './style.css';
-import Dots from './dots.svg';
+import Trash from './trash.svg';
 import Enter from './enter.svg';
 import Load from './load.svg';
+import { checkIndex, tasks, index, saveTaskArr, addTask, updateIndex, tasksChecker, renderTask } from './functions.js';
 
 const main = document.getElementById('main');
 const listContainer = document.createElement('div');
@@ -15,36 +16,18 @@ listContainer.innerHTML = `<div id="list-title" class="d-flex row"><h3>Today's T
 </div>`;
 main.appendChild(listContainer);
 
-const list = [{
-  description: 'Finish the project',
-  completed: false,
-  index: 3,
-},
-{
-  description: 'Buy dinner',
-  completed: false,
-  index: 1,
-},
-{
-  description: 'Walk the dog',
-  completed: false,
-  index: 2,
-},
-{
-  description: 'Help mom with the TV',
-  completed: false,
-  index: 4,
-}];
+const listInput = document.getElementById('input-field');
+listInput.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter'){
+    console.log('working');
+    addTask(listInput.value, index, Trash)
+  }
+});
 
 window.addEventListener('load', () => {
-  const listUl = document.getElementById('list');
-  list.sort((a, b) => a.index - b.index);
-  list.forEach((task) => {
-    const newTask = document.createElement('li');
-    newTask.classList.add('task-container', 'd-flex', 'row');
-    newTask.innerHTML = `<input type="checkbox" class="task-cb">
-    <p class="task-info">${task.description}</p>
-    <img src="${Dots}" alt="Load Icon" class="click">`;
-    listUl.appendChild(newTask);
-  });
+  tasksChecker();
+  console.log(tasks);
+  checkIndex();
+  renderTask(tasks, Trash);
+  saveTaskArr(tasks);
 });
