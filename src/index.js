@@ -2,7 +2,7 @@ import './style.css';
 import Trash from './trash.svg';
 import Enter from './enter.svg';
 import Load from './load.svg';
-import { main, listContainer, checkIndex, tasks, index, saveTaskArr, addTask, tasksChecker, renderTask } from './functions.js';
+import { main, listContainer, checkIndex, tasks, saveTaskArr, addNewTask, tasksChecker, renderTask } from './functions.js';
 
 listContainer.innerHTML = `<div id="list-title" class="d-flex row"><h3>Today's To Do</h3><img src="${Load}" alt="Load Icon" class="click"></div>
 <div id="list-input" class="d-flex row"><input type="text" id="input-field" placeholder="Add to your list..."><img src="${Enter}" alt="Enter Icon" class="click"></div>
@@ -22,18 +22,7 @@ window.addEventListener('load', () => {
 const taskInput = document.getElementById('input-field');
 taskInput.addEventListener('keydown', (e) => {
   if(e.key === 'Enter'){
-    let newIndex = localStorage.getItem('index');
-    let task = {
-      description: taskInput.value,
-      completed: false,
-      index: newIndex,
-    }
-    tasks.push(task);
-    saveTaskArr(tasks);
-    checkIndex();
-    addTask(task, newIndex, Trash)
-    checkIndex();
-    taskInput.value = null;
+    addNewTask(taskInput, Trash);
   }
 });
 
@@ -42,7 +31,6 @@ const listInput = document.getElementById('list-input');
 taskInput.addEventListener('focus', () => {
   listInput.classList.add('focus');
 });
-
 
 taskInput.addEventListener('blur', () => {
   listInput.classList.remove('focus');

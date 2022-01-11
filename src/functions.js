@@ -103,7 +103,24 @@ function reload(tasks, Trash){
   checkIndex();
 }
 
+function addNewTask(taskInput, Trash) {
+  let newIndex = localStorage.getItem('index');
+    let task = {
+      description: taskInput.value,
+      completed: false,
+      index: newIndex,
+    }
+    tasks.push(task);
+    saveTaskArr(tasks);
+    checkIndex();
+    let listDiv = document.getElementById('list');
+    listDiv.innerHTML = '';
+    renderTask(tasks, Trash);
+    checkIndex();
+    taskInput.value = null;
+}
 
 
 
-export { saveTaskArr, checkIndex, updateIndex, tasksChecker, renderTask, addTask, reload };
+
+export { saveTaskArr, checkIndex, updateIndex, tasksChecker, renderTask, addTask, reload, addNewTask };
