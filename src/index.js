@@ -8,18 +8,13 @@ const main = document.getElementById('main');
 const listContainer= document.createElement('div')
 listContainer.id = 'list-container';
 listContainer.className = 'd-flex';
-
-const dotsIcon = new Image();
-dotsIcon.src = Dots;
-
-const enterIcon = new Image();
-enterIcon.src = Enter;
-
-const loadIcon = new Image();
-loadIcon.src = Load;
-
-main.innerHTML = ``
-
+listContainer.innerHTML = `<div id="list-title" class="d-flex row"><h3>Today's To Do</h3><img src="${Load}" alt="Load Icon"></div>
+<div id="list-input" class="d-flex row"><input type="text" id="input-field" placeholder="Add to your list..."><img src="${Enter}" alt="Enter Icon"></div>
+<ul id="list" class="d-flex"></ul>
+<div id="list-bottom">
+    <p id="list-clear">Clear all completed</p>
+</div>`
+main.appendChild(listContainer);
 
 const list = [{
   description: 'Finish the project',
@@ -43,6 +38,6 @@ list.forEach(task => {
   newTask.classList.add('task-container', 'd-flex', 'row');
   newTask.innerHTML = `<input type="checkbox" class="task-cb">
   <p class="task-info">${task.description}</p>
-  <p>l</p>`
+  <img src="${Dots}" alt="Load Icon">`
   listUl.appendChild(newTask);
 });
