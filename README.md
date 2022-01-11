@@ -6,7 +6,7 @@ It is a basic To Do List on which the user can add small task to be completed in
 
 ### Preview
 
-![Preview](.preview.png)
+![Preview](./preview.png)
 
 ## Built With
 
