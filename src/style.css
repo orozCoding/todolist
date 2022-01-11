@@ -23,6 +23,10 @@ ul {
   flex-direction: row;
 }
 
+.click {
+  cursor: pointer;
+}
+
 #main {
   align-items: center;
   justify-content: center;
@@ -70,6 +74,10 @@ ul {
 .task-container {
   gap: 10px;
   font-size: 15px;
+}
+
+#list-clear:hover {
+  text-decoration: underline;
 }
 
 input {
