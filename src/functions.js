@@ -40,12 +40,12 @@ function tasksChecker() {
       index: 3,
     },
     {
-      description: 'This is an example',
+      description: 'This is a task example',
       completed: false,
       index: 1,
     },
     {
-      description: 'You can remove the tasks with the right button ->',
+      description: 'You can remove any item with the button =>',
       completed: false,
       index: 2,
     },
