@@ -13,3 +13,16 @@ body {
 ul {
   list-style: none;
 }
+
+.d-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.task-container {
+  
+}
