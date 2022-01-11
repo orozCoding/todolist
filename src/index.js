@@ -19,12 +19,12 @@ window.addEventListener('load', () => {
   checkIndex();
 });
 
-const listInput = document.getElementById('input-field');
-listInput.addEventListener('keydown', (e) => {
+const taskInput = document.getElementById('input-field');
+taskInput.addEventListener('keydown', (e) => {
   if(e.key === 'Enter'){
     let newIndex = localStorage.getItem('index');
     let task = {
-      description: listInput.value,
+      description: taskInput.value,
       completed: false,
       index: newIndex,
     }
@@ -33,5 +33,17 @@ listInput.addEventListener('keydown', (e) => {
     checkIndex();
     addTask(task, newIndex, Trash)
     checkIndex();
+    taskInput.value = null;
   }
+});
+
+const listInput = document.getElementById('list-input');
+
+taskInput.addEventListener('focus', () => {
+  listInput.classList.add('focus');
+});
+
+
+taskInput.addEventListener('blur', () => {
+  listInput.classList.remove('focus');
 });

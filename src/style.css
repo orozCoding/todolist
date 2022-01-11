@@ -66,6 +66,11 @@ ul {
   font-size: 16px;
 }
 
+#input-field:focus {
+  background-color: rgb(220, 255, 220);
+}
+
+
 #list-bottom {
   padding: 15px 10px;
   background-color: rgb(241, 241, 241);
@@ -91,4 +96,12 @@ input:focus {
 
 input::placeholder {
   font-style: italic;
+}
+
+#input-field {
+  width: 100%;
+}
+
+.focus {
+  background-color: rgb(220, 255, 220);
 }
