@@ -19,7 +19,7 @@ main.appendChild(listContainer);
 const list = [{
   description: 'Finish the project',
   completed: false,
-  index: 2,
+  index: 3
 },
 {
   description: 'Buy dinner',
@@ -29,15 +29,23 @@ const list = [{
 {
   description: 'Walk the dog',
   completed: false,
-  index: 3
+  index: 2
+},
+{
+  description: 'Help mom with the TV',
+  completed: false,
+  index: 4
 }]
 
-const listUl = document.getElementById('list');
-list.forEach(task => {
-  const newTask = document.createElement('li');
-  newTask.classList.add('task-container', 'd-flex', 'row');
-  newTask.innerHTML = `<input type="checkbox" class="task-cb">
-  <p class="task-info">${task.description}</p>
-  <img src="${Dots}" alt="Load Icon">`
-  listUl.appendChild(newTask);
+window.addEventListener('load', () => {
+  const listUl = document.getElementById('list');
+  list.sort((a, b) => a.index - b.index);
+  list.forEach(task => {
+    const newTask = document.createElement('li');
+    newTask.classList.add('task-container', 'd-flex', 'row');
+    newTask.innerHTML = `<input type="checkbox" class="task-cb">
+    <p class="task-info">${task.description}</p>
+    <img src="${Dots}" alt="Load Icon">`
+    listUl.appendChild(newTask);
+  });
 });

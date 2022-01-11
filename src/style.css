@@ -34,8 +34,10 @@ ul {
 
 #list-container {
   width: 70%;
+  max-width: 500px;
   min-width: 300px;
   background-color: white;
+  box-shadow: 0px 3px 5px 0px #BFC6BE;
 }
 
 #list-container div{
@@ -56,8 +58,23 @@ ul {
   border-bottom: 1px solid lightgray;
 }
 
+#list-title {
+  font-size: 16px;
+}
+
+#list-bottom {
+  padding: 15px 10px;
+  background-color: rgb(241, 241, 241);
+}
+
+.task-container {
+  gap: 10px;
+  font-size: 15px;
+}
+
 input {
   border: none;
+  font-size: 16px;
 }
 
 input:focus {
