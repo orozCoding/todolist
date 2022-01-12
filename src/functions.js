@@ -78,6 +78,7 @@ function editTask(tasks, index, inputField) {
 function addTask(task, index, Trash) {
   const listUl = document.getElementById('list');
   const newTask = document.createElement('li');
+  newTask.id = `task-${index}`;
   newTask.classList.add('task-container', 'd-flex', 'row');
   newTask.innerHTML = `<input type="checkbox" class="task-cb">
     <input id="input-${index}" type="text" class="task-info">
@@ -95,11 +96,21 @@ function addTask(task, index, Trash) {
     renderTask(tasks, Trash);
   });
   let inputField = document.getElementById(`input-${index}`);
+  let taskContainer = document.getElementById(`task-${index}`);
   inputField.addEventListener('focus', () => {
     console.log(`focus en el boton con index ${index}`)
+    taskContainer.classList.add('focus-task')
   })
   inputField.addEventListener('blur', () => {
     console.log(`blur en el boton con index ${index}`)
+    if(inputField.value === ''){
+      tasks = removeTask(tasks, fixIndex);
+      saveTaskArr(tasks);
+      let listDiv = document.getElementById('list');
+      listDiv.innerHTML = '';
+      renderTask(tasks, Trash);
+    }
+    taskContainer.classList.remove('focus-task')
     editTask(tasks, index, inputField);
   })
 }

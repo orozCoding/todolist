@@ -105,3 +105,13 @@ input::placeholder {
 .focus {
   background-color: rgb(220, 255, 220);
 }
+
+.focus-task {
+  background-color: lightyellow;
+}
+
+.task-info:focus {
+  background-color: lightyellow;
+}
+
+
