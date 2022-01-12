@@ -35,6 +35,6 @@ export default function completed() {
         input.removeAttribute('disabled');
         editCompleted(boxes[i], tasks, x);
       }
-    })
+    });
   }
-};
+}
