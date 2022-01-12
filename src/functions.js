@@ -1,5 +1,5 @@
-export let index = 1;
-export let tasks = [];
+export const index = 1;
+export const tasks = [];
 export const main = document.getElementById('main');
 export const listContainer = document.createElement('div');
 listContainer.id = 'list-container';
@@ -10,7 +10,7 @@ function updateIndex(tasks) {
   tasks.forEach((task) => {
     task.index = index;
     index += 1;
-  })
+  });
 }
 
 function saveTaskArr(tasks) {
@@ -21,9 +21,9 @@ function saveTaskArr(tasks) {
 
 function checkIndex() {
   if (localStorage.getItem('taskArr')) {
-    let newArr = JSON.parse(localStorage.getItem('taskArr'));
+    const newArr = JSON.parse(localStorage.getItem('taskArr'));
     index = newArr.length + 1;
-    localStorage.setItem('index', index)
+    localStorage.setItem('index', index);
   } else {
     localStorage.setItem('index', '1');
   }
@@ -31,36 +31,36 @@ function checkIndex() {
 
 function tasksChecker() {
   if (localStorage.getItem('taskArr')) {
-    return tasks = JSON.parse(localStorage.getItem('taskArr'))
+    tasks = JSON.parse(localStorage.getItem('taskArr'));
+    return tasks;
   }
-  else {
-    return tasks = [{
-      description: 'You can also edit any item if you click on it!',
-      completed: false,
-      index: 3,
-    },
-    {
-      description: 'This is a task example',
-      completed: false,
-      index: 1,
-    },
-    {
-      description: 'You can remove any item with the button =>',
-      completed: false,
-      index: 2,
-    },
-    {
-      description: 'Enjoy!',
-      completed: false,
-      index: 4,
-    }];
-  }
+  tasks = [{
+    description: 'You can also edit any item if you click on it!',
+    completed: false,
+    index: 3,
+  },
+  {
+    description: 'This is a task example',
+    completed: false,
+    index: 1,
+  },
+  {
+    description: 'You can remove any item with the button =>',
+    completed: false,
+    index: 2,
+  },
+  {
+    description: 'Enjoy!',
+    completed: false,
+    index: 4,
+  }];
+  return tasks;
 }
 
 function removeTask(tasks, index) {
-  let removing = tasks.filter(task => task.index !== index);
-  let currentIndex = localStorage.getItem('index', index);
-  let newIndex = currentIndex - 1;
+  const removing = tasks.filter((task) => task.index !== index);
+  const currentIndex = localStorage.getItem('index', index);
+  const newIndex = currentIndex - 1;
   localStorage.setItem('index', newIndex);
   return removing;
 }
@@ -87,33 +87,33 @@ function addTask(task, index, Trash, Check) {
   const input = document.getElementById(`input-${index}`);
   input.value = task.description;
   const remove = document.getElementById(`remove-${index}`);
-  let fixIndex = index;
+  const fixIndex = index;
   remove.addEventListener('click', () => {
     tasks = removeTask(tasks, fixIndex);
     saveTaskArr(tasks);
-    let listDiv = document.getElementById('list');
+    const listDiv = document.getElementById('list');
     listDiv.innerHTML = '';
     renderTask(tasks, Trash, Check);
   });
-  let inputField = document.getElementById(`input-${index}`);
-  let taskContainer = document.getElementById(`task-${index}`);
-  let checkImg = document.getElementById(`check-${index}`);
+  const inputField = document.getElementById(`input-${index}`);
+  const taskContainer = document.getElementById(`task-${index}`);
+  const checkImg = document.getElementById(`check-${index}`);
   inputField.addEventListener('focus', () => {
     taskContainer.classList.add('focus-task');
     checkImg.classList.remove('d-off');
-  })
+  });
   inputField.addEventListener('blur', () => {
     if (inputField.value === '') {
       tasks = removeTask(tasks, fixIndex);
       saveTaskArr(tasks);
-      let listDiv = document.getElementById('list');
+      const listDiv = document.getElementById('list');
       listDiv.innerHTML = '';
       renderTask(tasks, Trash, Check);
     }
     taskContainer.classList.remove('focus-task');
     checkImg.classList.add('d-off');
     editTask(tasks, index, inputField);
-  })
+  });
 }
 
 function renderTask(tasks, Trash, Check) {
@@ -126,20 +126,20 @@ function renderTask(tasks, Trash, Check) {
 }
 
 function addNewTask(taskInput, Trash, Check) {
-  let newIndex = localStorage.getItem('index');
-  let task = {
+  const newIndex = localStorage.getItem('index');
+  const task = {
     description: taskInput.value,
     completed: false,
     index: newIndex,
-  }
+  };
   tasks.push(task);
   saveTaskArr(tasks);
   checkIndex();
-  let listDiv = document.getElementById('list');
+  const listDiv = document.getElementById('list');
   listDiv.innerHTML = '';
   renderTask(tasks, Trash, Check);
   checkIndex();
   taskInput.value = null;
 }
 
-export { saveTaskArr, checkIndex, updateIndex, tasksChecker, renderTask, addTask, addNewTask };
+export { saveTaskArr, checkIndex, updateIndex, tasksChecker, renderTask, addTask, addNewTask }; // eslint-disable-line
