@@ -35,7 +35,7 @@ function tasksChecker() {
   }
   else {
     return tasks = [{
-      description: 'You can also edit the text if you click on it!',
+      description: 'You can also edit any item if you click on it!',
       completed: false,
       index: 3,
     },
@@ -68,20 +68,20 @@ function removeTask(tasks, index) {
 function editTask(tasks, index, inputField) {
   for(let i = 0 ; i < tasks.length ; i += 1){
     if(tasks[i].index === index){
-      console.log(tasks)
       tasks[i].description = inputField.value;
       saveTaskArr(tasks);
     }
   } 
 }
 
-function addTask(task, index, Trash) {
+function addTask(task, index, Trash, Check) {
   const listUl = document.getElementById('list');
   const newTask = document.createElement('li');
   newTask.id = `task-${index}`;
   newTask.classList.add('task-container', 'd-flex', 'row');
   newTask.innerHTML = `<input type="checkbox" class="task-cb">
     <input id="input-${index}" type="text" class="task-info">
+    <img id="check-${index}" src="${Check}" alt="Check Icon" class="click d-off">
     <img id="remove-${index}" src="${Trash}" alt="Remove Icon" class="click">`;
   listUl.appendChild(newTask);
   const input = document.getElementById(`input-${index}`);
@@ -93,38 +93,39 @@ function addTask(task, index, Trash) {
     saveTaskArr(tasks);
     let listDiv = document.getElementById('list');
     listDiv.innerHTML = '';
-    renderTask(tasks, Trash);
+    renderTask(tasks, Trash, Check);
   });
   let inputField = document.getElementById(`input-${index}`);
   let taskContainer = document.getElementById(`task-${index}`);
+  let checkImg = document.getElementById(`check-${index}`);
   inputField.addEventListener('focus', () => {
-    console.log(`focus en el boton con index ${index}`)
-    taskContainer.classList.add('focus-task')
+    taskContainer.classList.add('focus-task');
+    checkImg.classList.remove('d-off');
   })
   inputField.addEventListener('blur', () => {
-    console.log(`blur en el boton con index ${index}`)
     if(inputField.value === ''){
       tasks = removeTask(tasks, fixIndex);
       saveTaskArr(tasks);
       let listDiv = document.getElementById('list');
       listDiv.innerHTML = '';
-      renderTask(tasks, Trash);
+      renderTask(tasks, Trash, Check);
     }
-    taskContainer.classList.remove('focus-task')
+    taskContainer.classList.remove('focus-task');
+    checkImg.classList.add('d-off');
     editTask(tasks, index, inputField);
   })
 }
 
-function renderTask(tasks, Trash) {
+function renderTask(tasks, Trash, Check) {
   tasks.sort((a, b) => a.index - b.index);
   index = 1;
   tasks.forEach((task) => {
-    addTask(task, index, Trash);
+    addTask(task, index, Trash, Check);
     index += 1;
   });
 }
 
-function addNewTask(taskInput, Trash) {
+function addNewTask(taskInput, Trash, Check) {
   let newIndex = localStorage.getItem('index');
     let task = {
       description: taskInput.value,
@@ -136,7 +137,7 @@ function addNewTask(taskInput, Trash) {
     checkIndex();
     let listDiv = document.getElementById('list');
     listDiv.innerHTML = '';
-    renderTask(tasks, Trash);
+    renderTask(tasks, Trash, Check);
     checkIndex();
     taskInput.value = null;
 }

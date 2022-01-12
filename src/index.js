@@ -2,6 +2,7 @@ import './style.css';
 import Trash from './trash.svg';
 import Enter from './enter.svg';
 import Load from './load.svg';
+import Check from './check.svg';
 import { main, listContainer, checkIndex, tasks, saveTaskArr, addNewTask, tasksChecker, renderTask } from './functions.js';
 
 listContainer.innerHTML = `<div id="list-title" class="d-flex row"><h3>Today's To Do</h3><img src="${Load}" alt="Load Icon" class="click"></div>
@@ -14,7 +15,7 @@ main.appendChild(listContainer);
 
 window.addEventListener('load', () => {
   tasksChecker();
-  renderTask(tasks, Trash);
+  renderTask(tasks, Trash, Check);
   saveTaskArr(tasks);
   checkIndex();
 });
@@ -27,7 +28,7 @@ taskInput.addEventListener('keydown', (e) => {
     if(taskInput.value === ''){
       return;
     } else {
-    addNewTask(taskInput, Trash);
+    addNewTask(taskInput, Trash, Check);
     }
   }
 });
