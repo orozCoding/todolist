@@ -84,7 +84,21 @@ function addTask(task, index, Trash) {
     listDiv.innerHTML = '';
     renderTask(tasks, Trash);
   });
-  index += 1;
+  let inputField = document.getElementById(`input-${index}`);
+  inputField.addEventListener('focus', () => {
+    console.log(`focus en el boton con index ${index}`)
+  })
+  inputField.addEventListener('blur', () => {
+    console.log(`blur en el boton con index ${index}`)
+    
+    for(let i = 0 ; i < tasks.length ; i += 1){
+      if(tasks[i].index === index){
+        console.log(tasks)
+        tasks[i].description = inputField.value;
+        saveTaskArr(tasks);
+      }
+    } 
+  })
 }
 
 function renderTask(tasks, Trash) {
@@ -94,13 +108,6 @@ function renderTask(tasks, Trash) {
     addTask(task, index, Trash);
     index += 1;
   });
-}
-
-function reload(tasks, Trash){
-  tasksChecker();
-  renderTask(tasks, Trash);
-  saveTaskArr(tasks);
-  checkIndex();
 }
 
 function addNewTask(taskInput, Trash) {
@@ -120,7 +127,4 @@ function addNewTask(taskInput, Trash) {
     taskInput.value = null;
 }
 
-
-
-
-export { saveTaskArr, checkIndex, updateIndex, tasksChecker, renderTask, addTask, reload, addNewTask };
+export { saveTaskArr, checkIndex, updateIndex, tasksChecker, renderTask, addTask, addNewTask };
