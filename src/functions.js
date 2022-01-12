@@ -5,7 +5,7 @@ export const listContainer = document.createElement('div');
 listContainer.id = 'list-container';
 listContainer.className = 'd-flex';
 
-function updateIndex(tasks){
+function updateIndex(tasks) {
   index = 1;
   tasks.forEach((task) => {
     task.index = index;
@@ -21,7 +21,7 @@ function saveTaskArr(tasks) {
 
 function checkIndex() {
   if (localStorage.getItem('taskArr')) {
-    let newArr = JSON.parse(localStorage.getItem('taskArr')); 
+    let newArr = JSON.parse(localStorage.getItem('taskArr'));
     index = newArr.length + 1;
     localStorage.setItem('index', index)
   } else {
@@ -66,12 +66,12 @@ function removeTask(tasks, index) {
 }
 
 function editTask(tasks, index, inputField) {
-  for(let i = 0 ; i < tasks.length ; i += 1){
-    if(tasks[i].index === index){
+  for (let i = 0; i < tasks.length; i += 1) {
+    if (tasks[i].index === index) {
       tasks[i].description = inputField.value;
       saveTaskArr(tasks);
     }
-  } 
+  }
 }
 
 function addTask(task, index, Trash, Check) {
@@ -103,7 +103,7 @@ function addTask(task, index, Trash, Check) {
     checkImg.classList.remove('d-off');
   })
   inputField.addEventListener('blur', () => {
-    if(inputField.value === ''){
+    if (inputField.value === '') {
       tasks = removeTask(tasks, fixIndex);
       saveTaskArr(tasks);
       let listDiv = document.getElementById('list');
@@ -127,19 +127,19 @@ function renderTask(tasks, Trash, Check) {
 
 function addNewTask(taskInput, Trash, Check) {
   let newIndex = localStorage.getItem('index');
-    let task = {
-      description: taskInput.value,
-      completed: false,
-      index: newIndex,
-    }
-    tasks.push(task);
-    saveTaskArr(tasks);
-    checkIndex();
-    let listDiv = document.getElementById('list');
-    listDiv.innerHTML = '';
-    renderTask(tasks, Trash, Check);
-    checkIndex();
-    taskInput.value = null;
+  let task = {
+    description: taskInput.value,
+    completed: false,
+    index: newIndex,
+  }
+  tasks.push(task);
+  saveTaskArr(tasks);
+  checkIndex();
+  let listDiv = document.getElementById('list');
+  listDiv.innerHTML = '';
+  renderTask(tasks, Trash, Check);
+  checkIndex();
+  taskInput.value = null;
 }
 
 export { saveTaskArr, checkIndex, updateIndex, tasksChecker, renderTask, addTask, addNewTask };
