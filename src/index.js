@@ -24,11 +24,21 @@ const enterBtn = document.getElementById('btn-enter');
 
 taskInput.addEventListener('keydown', (e) => {
   if(e.key === 'Enter'){
+    if(taskInput.value === ''){
+      return;
+    } else {
     addNewTask(taskInput, Trash);
+    }
   }
 });
 
-enterBtn.addEventListener('click', () => addNewTask(taskInput, Trash));
+enterBtn.addEventListener('click', () => {
+  if(taskInput.value === ''){
+    return;
+  } else {
+  addNewTask(taskInput, Trash)
+}
+});
 
 const listInput = document.getElementById('list-input');
 

@@ -65,6 +65,16 @@ function removeTask(tasks, index) {
   return removing;
 }
 
+function editTask(tasks, index, inputField) {
+  for(let i = 0 ; i < tasks.length ; i += 1){
+    if(tasks[i].index === index){
+      console.log(tasks)
+      tasks[i].description = inputField.value;
+      saveTaskArr(tasks);
+    }
+  } 
+}
+
 function addTask(task, index, Trash) {
   const listUl = document.getElementById('list');
   const newTask = document.createElement('li');
@@ -90,14 +100,7 @@ function addTask(task, index, Trash) {
   })
   inputField.addEventListener('blur', () => {
     console.log(`blur en el boton con index ${index}`)
-    
-    for(let i = 0 ; i < tasks.length ; i += 1){
-      if(tasks[i].index === index){
-        console.log(tasks)
-        tasks[i].description = inputField.value;
-        saveTaskArr(tasks);
-      }
-    } 
+    editTask(tasks, index, inputField);
   })
 }
 
