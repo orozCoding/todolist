@@ -64,6 +64,21 @@ function editTask(index, inputField) {
   }
 }
 
+function resetCompleted() {
+  const tasks = getTasks();
+  for (let i = 0; i < tasks.length; i += 1) {
+    if (tasks[i].completed === true) {
+      const container = document.getElementById(`task-${i + 1}`);
+      const input = document.getElementById(`input-${i + 1}`);
+      const box = document.getElementById(`cb-${i + 1}`);
+      container.classList.add('completed');
+      input.style.backgroundColor = 'lightgray';
+      input.setAttribute('disabled', 'disabled');
+      box.setAttribute('checked', 'checked');
+    }
+  }
+}
+
 function addTask(task, index, Trash, Check) {
   const listUl = document.getElementById('list');
   const newTask = document.createElement('li');
@@ -91,6 +106,7 @@ function addTask(task, index, Trash, Check) {
       index += 1;
     });
     completed();
+    resetCompleted();
   });
   const inputField = document.getElementById(`input-${index}`);
   const taskContainer = document.getElementById(`task-${index}`);
@@ -121,21 +137,6 @@ function addTask(task, index, Trash, Check) {
     editTask(index, inputField);
     box.removeAttribute('disabled');
   });
-}
-
-function resetCompleted() {
-  const tasks = getTasks();
-  for (let i = 0; i < tasks.length; i += 1) {
-    if (tasks[i].completed === true) {
-      const container = document.getElementById(`task-${i + 1}`);
-      const input = document.getElementById(`input-${i + 1}`);
-      const box = document.getElementById(`cb-${i + 1}`);
-      container.classList.add('completed');
-      input.style.backgroundColor = 'lightgray';
-      input.setAttribute('disabled', 'disabled');
-      box.setAttribute('checked', 'checked');
-    }
-  }
 }
 
 function renderTask(tasks, Trash, Check) {
