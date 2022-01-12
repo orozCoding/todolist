@@ -1,4 +1,4 @@
-import completed from './completed.js';
+import { completed } from './completed';
 
 export let tasks = []; // eslint-disable-line
 export const main = document.getElementById('main');
@@ -95,9 +95,11 @@ function addTask(task, index, Trash, Check) {
   const inputField = document.getElementById(`input-${index}`);
   const taskContainer = document.getElementById(`task-${index}`);
   const checkImg = document.getElementById(`check-${index}`);
+  const box = document.getElementById(`cb-${index}`);
   inputField.addEventListener('focus', () => {
     taskContainer.classList.add('focus-task');
     checkImg.classList.remove('d-off');
+    box.setAttribute('disabled', 'disabled');
   });
   inputField.addEventListener('blur', () => {
     if (inputField.value === '') {
@@ -117,13 +119,23 @@ function addTask(task, index, Trash, Check) {
     taskContainer.classList.remove('focus-task');
     checkImg.classList.add('d-off');
     editTask(index, inputField);
+    box.removeAttribute('disabled');
   });
 }
 
-function resetCompleted(tasks) {
-  tasks.forEach((task) => {
-    task.completed = false;
-  });
+function resetCompleted() {
+  const tasks = getTasks();
+  for (let i = 0; i < tasks.length; i += 1) {
+    if (tasks[i].completed === true) {
+      const container = document.getElementById(`task-${i + 1}`);
+      const input = document.getElementById(`input-${i + 1}`);
+      const box = document.getElementById(`cb-${i + 1}`);
+      container.classList.add('completed');
+      input.style.backgroundColor = 'lightgray';
+      input.setAttribute('disabled', 'disabled');
+      box.setAttribute('checked', 'checked');
+    }
+  }
 }
 
 function renderTask(tasks, Trash, Check) {
@@ -134,7 +146,7 @@ function renderTask(tasks, Trash, Check) {
     index += 1;
   });
   completed();
-  resetCompleted(tasks);
+  resetCompleted();
   updateIndex(tasks);
 }
 
@@ -147,8 +159,8 @@ function addNewTask(taskInput, Trash, Check) {
   };
   const tasks = getTasks();
   tasks.push(task);
-  resetCompleted(tasks);
   saveTaskArr(tasks);
+  resetCompleted();
   checkIndex();
   const listDiv = document.getElementById('list');
   listDiv.innerHTML = '';
@@ -162,8 +174,9 @@ function clearCompleted(Trash, Check) {
   tasks = tasks.filter((task) => task.completed === false);
   const listDiv = document.getElementById('list');
   listDiv.innerHTML = '';
-  renderTask(tasks, Trash, Check);
+  updateIndex(tasks);
   localStorage.setItem('taskArr', JSON.stringify(tasks));
+  renderTask(tasks, Trash, Check);
 }
 
 export { saveTaskArr, checkIndex, updateIndex, tasksChecker, renderTask, addTask, addNewTask, clearCompleted }; // eslint-disable-line

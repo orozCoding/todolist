@@ -1,4 +1,4 @@
-function editCompleted(box, tasks, index) {
+export function editCompleted(box, tasks, index) {
   if (box.checked) {
     for (let i = 0; i < tasks.length; i += 1) {
       if (tasks[i].index === index) {
@@ -16,7 +16,7 @@ function editCompleted(box, tasks, index) {
   }
 }
 
-export default function completed() {
+export function completed() {
   const tasks = JSON.parse(localStorage.getItem('taskArr'));
   const boxes = document.querySelectorAll('.task-cb');
 
