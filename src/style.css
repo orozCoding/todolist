@@ -70,10 +70,13 @@ ul {
   font-size: 16px;
 }
 
+#input-field {
+  width: 100%;
+}
+
 #input-field:focus {
   background-color: rgb(220, 255, 220);
 }
-
 
 #list-bottom {
   padding: 15px 10px;
@@ -102,10 +105,6 @@ input::placeholder {
   font-style: italic;
 }
 
-#input-field {
-  width: 100%;
-}
-
 .focus {
   background-color: rgb(220, 255, 220);
 }
@@ -117,5 +116,3 @@ input::placeholder {
 .task-info:focus {
   background-color: lightyellow;
 }
-
-
