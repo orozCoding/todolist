@@ -55,6 +55,8 @@ ul {
 .task-info {
   text-align: left;
   flex-grow: 3;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 #list-title,
@@ -115,4 +117,9 @@ input::placeholder {
 
 .task-info:focus {
   background-color: lightyellow;
+}
+
+.completed {
+  background-color: lightgray;
+  text-decoration: line-through;
 }
