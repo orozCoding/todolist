@@ -27,6 +27,10 @@ ul {
   cursor: pointer;
 }
 
+.d-off {
+  display: none;
+}
+
 #main {
   align-items: center;
   justify-content: center;
@@ -66,6 +70,14 @@ ul {
   font-size: 16px;
 }
 
+#input-field {
+  width: 100%;
+}
+
+#input-field:focus {
+  background-color: rgb(220, 255, 220);
+}
+
 #list-bottom {
   padding: 15px 10px;
   background-color: rgb(241, 241, 241);
@@ -91,4 +103,16 @@ input:focus {
 
 input::placeholder {
   font-style: italic;
+}
+
+.focus {
+  background-color: rgb(220, 255, 220);
+}
+
+.focus-task {
+  background-color: lightyellow;
+}
+
+.task-info:focus {
+  background-color: lightyellow;
 }
