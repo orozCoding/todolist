@@ -14,6 +14,14 @@ It is a basic To Do List on which the user can add small task to be completed in
 - CSS
 - JavaScript
 
+## Getting Started
+
+- Install Node.js
+- Install text editor of your choice (eg. VS Code)
+- Clone the repository from [here](https://github.com/orozCoding/todolist)
+- On the root directory, run 'npm install' on the terminal to install packages.
+- Run 'npm start' on the terminal to start live server.
+
 ## Authors
 
 👤 **Angel Orozco**

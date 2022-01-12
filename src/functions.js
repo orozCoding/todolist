@@ -36,26 +36,7 @@ function tasksChecker() {
     tasks = JSON.parse(localStorage.getItem('taskArr'));
     return tasks;
   }
-  tasks = [{
-    description: 'You can also edit any item if you click on it!',
-    completed: false,
-    index: 3,
-  },
-  {
-    description: 'This is a task example',
-    completed: false,
-    index: 1,
-  },
-  {
-    description: 'You can remove any item with the button =>',
-    completed: false,
-    index: 2,
-  },
-  {
-    description: 'Enjoy!',
-    completed: false,
-    index: 4,
-  }];
+  tasks = [];
   return tasks;
 }
 
