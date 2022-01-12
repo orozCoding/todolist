@@ -51,4 +51,3 @@ const listClear = document.getElementById('list-clear');
 listClear.addEventListener('click', () => {
   clearCompleted(Trash, Check);
 });
-

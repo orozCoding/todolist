@@ -1,7 +1,7 @@
+import completed from './completed.js';
 export let tasks = []; // eslint-disable-line
 export const main = document.getElementById('main');
 export const listContainer = document.createElement('div');
-import completed from './completed.js';
 
 let index = 1;
 
@@ -16,7 +16,7 @@ function updateIndex(tasks) {
   });
 }
 
-function getTasks(){
+function getTasks() {
   return JSON.parse(localStorage.getItem('taskArr'));
 }
 
@@ -54,7 +54,7 @@ function removeTask(tasks, index) {
 }
 
 function editTask(index, inputField) {
-  let tasks = getTasks();
+  const tasks = getTasks();
   for (let i = 0; i < tasks.length; i += 1) {
     if (tasks[i].index === index) {
       tasks[i].description = inputField.value;
@@ -122,7 +122,7 @@ function addTask(task, index, Trash, Check) {
 function resetCompleted(tasks) {
   tasks.forEach((task) => {
     task.completed = false;
-  })
+  });
 }
 
 function renderTask(tasks, Trash, Check) {
@@ -144,7 +144,7 @@ function addNewTask(taskInput, Trash, Check) {
     completed: false,
     index: newIndex,
   };
-  let tasks = JSON.parse(localStorage.getItem('taskArr'));
+  const tasks = getTasks();
   tasks.push(task);
   resetCompleted(tasks);
   saveTaskArr(tasks);
@@ -158,11 +158,7 @@ function addNewTask(taskInput, Trash, Check) {
 
 function clearCompleted(Trash, Check) {
   let tasks = getTasks();
-  console.log('empiezo con estas task')
-  console.log(tasks);
   tasks = tasks.filter((task) => task.completed === false);
-  console.log('ahora me quedan estas task')
-  console.log(tasks);
   const listDiv = document.getElementById('list');
   listDiv.innerHTML = '';
   renderTask(tasks, Trash, Check);
