@@ -1,4 +1,4 @@
-export const tasks = [];
+export let tasks = []; // eslint-disable-line
 export const main = document.getElementById('main');
 export const listContainer = document.createElement('div');
 
@@ -95,7 +95,12 @@ function addTask(task, index, Trash, Check) {
     saveTaskArr(tasks);
     const listDiv = document.getElementById('list');
     listDiv.innerHTML = '';
-    renderTask(tasks, Trash, Check);
+    tasks.sort((a, b) => a.index - b.index);
+    index = 1;
+    tasks.forEach((task) => {
+      addTask(task, index, Trash, Check);
+      index += 1;
+    });
   });
   const inputField = document.getElementById(`input-${index}`);
   const taskContainer = document.getElementById(`task-${index}`);
@@ -110,7 +115,12 @@ function addTask(task, index, Trash, Check) {
       saveTaskArr(tasks);
       const listDiv = document.getElementById('list');
       listDiv.innerHTML = '';
-      renderTask(tasks, Trash, Check);
+      tasks.sort((a, b) => a.index - b.index);
+      index = 1;
+      tasks.forEach((task) => {
+        addTask(task, index, Trash, Check);
+        index += 1;
+      });
     }
     taskContainer.classList.remove('focus-task');
     checkImg.classList.add('d-off');

@@ -26,14 +26,14 @@ const enterBtn = document.getElementById('btn-enter');
 taskInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
     if (taskInput.value !== '') {
-      addNewTask(taskInput, Trash);
+      addNewTask(taskInput, Trash, Check);
     }
   }
 });
 
 enterBtn.addEventListener('click', () => {
   if (taskInput.value !== '') {
-    addNewTask(taskInput, Trash);
+    addNewTask(taskInput, Trash, Check);
   }
 });
 
