@@ -16,6 +16,10 @@ function updateIndex(tasks) {
   });
 }
 
+function getTasks(){
+  return JSON.parse(localStorage.getItem('taskArr'));
+}
+
 function saveTaskArr(tasks) {
   localStorage.setItem('taskArr', JSON.stringify(tasks));
   updateIndex(tasks);
@@ -49,7 +53,8 @@ function removeTask(tasks, index) {
   return removing;
 }
 
-function editTask(tasks, index, inputField) {
+function editTask(index, inputField) {
+  let tasks = getTasks();
   for (let i = 0; i < tasks.length; i += 1) {
     if (tasks[i].index === index) {
       tasks[i].description = inputField.value;
@@ -73,6 +78,7 @@ function addTask(task, index, Trash, Check) {
   const remove = document.getElementById(`remove-${index}`);
   const fixIndex = index;
   remove.addEventListener('click', () => {
+    let tasks = JSON.parse(localStorage.getItem('taskArr'));
     tasks = removeTask(tasks, fixIndex);
     saveTaskArr(tasks);
     const listDiv = document.getElementById('list');
@@ -94,6 +100,7 @@ function addTask(task, index, Trash, Check) {
   });
   inputField.addEventListener('blur', () => {
     if (inputField.value === '') {
+      let tasks = JSON.parse(localStorage.getItem('taskArr'));
       tasks = removeTask(tasks, fixIndex);
       saveTaskArr(tasks);
       const listDiv = document.getElementById('list');
@@ -108,8 +115,14 @@ function addTask(task, index, Trash, Check) {
     }
     taskContainer.classList.remove('focus-task');
     checkImg.classList.add('d-off');
-    editTask(tasks, index, inputField);
+    editTask(index, inputField);
   });
+}
+
+function resetCompleted(tasks) {
+  tasks.forEach((task) => {
+    task.completed = false;
+  })
 }
 
 function renderTask(tasks, Trash, Check) {
@@ -120,12 +133,8 @@ function renderTask(tasks, Trash, Check) {
     index += 1;
   });
   completed();
-}
-
-function resetCompleted(tasks) {
-  tasks.forEach((task) => {
-    task.completed = false;
-  })
+  resetCompleted(tasks);
+  updateIndex(tasks);
 }
 
 function addNewTask(taskInput, Trash, Check) {
@@ -135,6 +144,7 @@ function addNewTask(taskInput, Trash, Check) {
     completed: false,
     index: newIndex,
   };
+  let tasks = JSON.parse(localStorage.getItem('taskArr'));
   tasks.push(task);
   resetCompleted(tasks);
   saveTaskArr(tasks);
@@ -146,4 +156,17 @@ function addNewTask(taskInput, Trash, Check) {
   taskInput.value = null;
 }
 
-export { saveTaskArr, checkIndex, updateIndex, tasksChecker, renderTask, addTask, addNewTask }; // eslint-disable-line
+function clearCompleted(Trash, Check) {
+  let tasks = getTasks();
+  console.log('empiezo con estas task')
+  console.log(tasks);
+  tasks = tasks.filter((task) => task.completed === false);
+  console.log('ahora me quedan estas task')
+  console.log(tasks);
+  const listDiv = document.getElementById('list');
+  listDiv.innerHTML = '';
+  renderTask(tasks, Trash, Check);
+  localStorage.setItem('taskArr', JSON.stringify(tasks));
+}
+
+export { saveTaskArr, checkIndex, updateIndex, tasksChecker, renderTask, addTask, addNewTask, clearCompleted }; // eslint-disable-line
