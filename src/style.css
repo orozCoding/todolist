@@ -116,3 +116,8 @@ input::placeholder {
 .task-info:focus {
   background-color: lightyellow;
 }
+
+.completed {
+  background-color: lightgray;
+  text-decoration: line-through;
+}

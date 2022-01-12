@@ -1,6 +1,7 @@
 export let tasks = []; // eslint-disable-line
 export const main = document.getElementById('main');
 export const listContainer = document.createElement('div');
+import completed from './completed.js';
 
 let index = 1;
 
@@ -62,7 +63,7 @@ function addTask(task, index, Trash, Check) {
   const newTask = document.createElement('li');
   newTask.id = `task-${index}`;
   newTask.classList.add('task-container', 'd-flex', 'row');
-  newTask.innerHTML = `<input type="checkbox" class="task-cb">
+  newTask.innerHTML = `<input type="checkbox" id="cb-${index}" class="task-cb">
     <input id="input-${index}" type="text" class="task-info">
     <img id="check-${index}" src="${Check}" alt="Check Icon" class="click d-off">
     <img id="remove-${index}" src="${Trash}" alt="Remove Icon" class="click">`;
@@ -82,6 +83,7 @@ function addTask(task, index, Trash, Check) {
       addTask(task, index, Trash, Check);
       index += 1;
     });
+    completed();
   });
   const inputField = document.getElementById(`input-${index}`);
   const taskContainer = document.getElementById(`task-${index}`);
@@ -102,6 +104,7 @@ function addTask(task, index, Trash, Check) {
         addTask(task, index, Trash, Check);
         index += 1;
       });
+      completed();
     }
     taskContainer.classList.remove('focus-task');
     checkImg.classList.add('d-off');
@@ -116,6 +119,13 @@ function renderTask(tasks, Trash, Check) {
     addTask(task, index, Trash, Check);
     index += 1;
   });
+  completed();
+}
+
+function resetCompleted(tasks) {
+  tasks.forEach((task) => {
+    task.completed = false;
+  })
 }
 
 function addNewTask(taskInput, Trash, Check) {
@@ -126,6 +136,7 @@ function addNewTask(taskInput, Trash, Check) {
     index: newIndex,
   };
   tasks.push(task);
+  resetCompleted(tasks);
   saveTaskArr(tasks);
   checkIndex();
   const listDiv = document.getElementById('list');
