@@ -1,7 +1,9 @@
-export const index = 1;
 export const tasks = [];
 export const main = document.getElementById('main');
 export const listContainer = document.createElement('div');
+
+let index = 1;
+
 listContainer.id = 'list-container';
 listContainer.className = 'd-flex';
 
