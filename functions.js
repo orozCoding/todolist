@@ -1,4 +1,4 @@
-import { completed } from './completed';
+import { completed } from './completed.js';
 
 export let tasks = []; // eslint-disable-line
 export const main = document.getElementById('main');

@@ -1,8 +1,7 @@
-import './style.css';
-import Trash from './trash.svg';
-import Enter from './enter.svg';
-import Load from './load.svg';
-import Check from './check.svg';
+const Trash = './trash.svg';
+const Enter = './enter.svg';
+const Load = './load.svg';
+const Check = './check.svg';
 import { main, listContainer, checkIndex, tasks, saveTaskArr, addNewTask, tasksChecker, renderTask, clearCompleted } from './functions.js'; // eslint-disable-line
 
 listContainer.innerHTML = `<div id="list-title" class="d-flex row"><h3>Today's To Do</h3><img src="${Load}" alt="Load Icon" class="click"></div>
@@ -11,6 +10,11 @@ listContainer.innerHTML = `<div id="list-title" class="d-flex row"><h3>Today's T
 <div id="list-bottom">
     <p id="list-clear" class="click">Clear all completed</p>
 </div>`;
+
+if (!localStorage.getItem('taskArr')) {
+  localStorage.setItem('taskArr', JSON.stringify(tasks));
+}
+
 main.appendChild(listContainer);
 
 window.addEventListener('load', () => {
