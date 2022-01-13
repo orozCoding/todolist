@@ -8,6 +8,10 @@ It is a basic To Do List on which the user can add small task to be completed in
 
 ![Preview](./preview.png)
 
+## Live DEMO
+
+[Check a live demo](https://orozcoding.github.io/todolist/);
+
 ## Built With
 
 - HTML
