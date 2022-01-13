@@ -10,11 +10,11 @@ module.exports = {
     }),
   ],
   devServer: {
-    static: './dist',
+    static: './',
   },
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, './'),
   },
   module: {
     rules: [
