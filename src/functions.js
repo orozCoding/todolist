@@ -43,7 +43,7 @@ function tasksChecker() {
     return tasks;
   }
   tasks = [];
-  return tasks;
+  localStorage.setItem('taskArr', JSON.stringify(tasks))
 }
 
 function removeTask(tasks, index) {
