@@ -1,33 +1,49 @@
 import { completed } from './completed';
+import Load from './load.svg';
+import Trash from './trash.svg';
+import Enter from './enter.svg';
+import Check from './check.svg';
 
 export let tasks = []; // eslint-disable-line
-export const main = document.getElementById('main');
-export const listContainer = document.createElement('div');
 
+export const icons = {
+  Load, Trash, Enter, Check,
+};
 let index = 1;
 
-listContainer.id = 'list-container';
-listContainer.className = 'd-flex';
+const createMainSection = () => {
+  const main = document.getElementById('main');
+  const listContainer = document.createElement('div');
 
-function updateIndex(tasks) {
+  listContainer.id = 'list-container';
+  listContainer.className = 'd-flex';
+
+  listContainer.innerHTML = `<div id="list-title" class="d-flex row"><h3>Today's To Do</h3><img src="${Load}" alt="Load Icon" class="click"></div>
+<div id="list-input" class="d-flex row"><input type="text" id="input-field" placeholder="Add to your list..."><img id="btn-enter" src="${Enter}" alt="Enter Icon" class="click"></div>
+<ul id="list" class="d-flex"></ul>
+<div id="list-bottom">
+    <p id="list-clear" class="click">Clear all completed</p>
+</div>`;
+  main.appendChild(listContainer);
+};
+
+const updateIndex = (tasks) => {
   index = 1;
   tasks.forEach((task) => {
     task.index = index;
     index += 1;
   });
-}
+};
 
-function getTasks() {
-  return JSON.parse(localStorage.getItem('taskArr'));
-}
+const getTasks = () => JSON.parse(localStorage.getItem('taskArr'));
 
-function saveTaskArr(tasks) {
+const saveTaskArr = (tasks) => {
   localStorage.setItem('taskArr', JSON.stringify(tasks));
   updateIndex(tasks);
   localStorage.setItem('taskArr', JSON.stringify(tasks));
-}
+};
 
-function checkIndex() {
+const checkIndex = () => {
   if (localStorage.getItem('taskArr')) {
     const newArr = JSON.parse(localStorage.getItem('taskArr'));
     index = newArr.length + 1;
@@ -35,26 +51,26 @@ function checkIndex() {
   } else {
     localStorage.setItem('index', '1');
   }
-}
+};
 
-function tasksChecker() {
+const tasksChecker = () => {
   if (localStorage.getItem('taskArr')) {
     tasks = JSON.parse(localStorage.getItem('taskArr'));
-    return tasks;
+  } else {
+    tasks = [];
+    localStorage.setItem('taskArr', JSON.stringify(tasks));
   }
-  tasks = [];
-  localStorage.setItem('taskArr', JSON.stringify(tasks))
-}
+};
 
-function removeTask(tasks, index) {
+const removeTask = (tasks, index) => {
   const removing = tasks.filter((task) => task.index !== index);
   const currentIndex = localStorage.getItem('index', index);
   const newIndex = currentIndex - 1;
   localStorage.setItem('index', newIndex);
   return removing;
-}
+};
 
-function editTask(index, inputField) {
+const editTask = (index, inputField) => {
   const tasks = getTasks();
   for (let i = 0; i < tasks.length; i += 1) {
     if (tasks[i].index === index) {
@@ -62,9 +78,9 @@ function editTask(index, inputField) {
       saveTaskArr(tasks);
     }
   }
-}
+};
 
-function resetCompleted() {
+const resetCompleted = () => {
   const tasks = getTasks();
   for (let i = 0; i < tasks.length; i += 1) {
     if (tasks[i].completed === true) {
@@ -77,9 +93,10 @@ function resetCompleted() {
       box.setAttribute('checked', 'checked');
     }
   }
-}
+};
 
-function addTask(task, index, Trash, Check) {
+const addTask = (task, index, icons) => {
+  const { Trash, Check } = icons;
   const listUl = document.getElementById('list');
   const newTask = document.createElement('li');
   newTask.id = `task-${index}`;
@@ -102,7 +119,7 @@ function addTask(task, index, Trash, Check) {
     tasks.sort((a, b) => a.index - b.index);
     index = 1;
     tasks.forEach((task) => {
-      addTask(task, index, Trash, Check);
+      addTask(task, index, icons);
       index += 1;
     });
     completed();
@@ -127,7 +144,7 @@ function addTask(task, index, Trash, Check) {
       tasks.sort((a, b) => a.index - b.index);
       index = 1;
       tasks.forEach((task) => {
-        addTask(task, index, Trash, Check);
+        addTask(task, index, icons);
         index += 1;
       });
       completed();
@@ -137,21 +154,21 @@ function addTask(task, index, Trash, Check) {
     editTask(index, inputField);
     box.removeAttribute('disabled');
   });
-}
+};
 
-function renderTask(tasks, Trash, Check) {
+const renderTask = (tasks, icons) => {
   tasks.sort((a, b) => a.index - b.index);
   index = 1;
   tasks.forEach((task) => {
-    addTask(task, index, Trash, Check);
+    addTask(task, index, icons);
     index += 1;
   });
   completed();
   resetCompleted();
   updateIndex(tasks);
-}
+};
 
-function addNewTask(taskInput, Trash, Check) {
+const addNewTask = (taskInput, icons) => {
   const newIndex = localStorage.getItem('index');
   const task = {
     description: taskInput.value,
@@ -165,19 +182,53 @@ function addNewTask(taskInput, Trash, Check) {
   checkIndex();
   const listDiv = document.getElementById('list');
   listDiv.innerHTML = '';
-  renderTask(tasks, Trash, Check);
+  renderTask(tasks, icons);
   checkIndex();
   taskInput.value = null;
-}
+};
 
-function clearCompleted(Trash, Check) {
+const clearCompleted = (icons) => {
   let tasks = getTasks();
   tasks = tasks.filter((task) => task.completed === false);
   const listDiv = document.getElementById('list');
   listDiv.innerHTML = '';
   updateIndex(tasks);
   localStorage.setItem('taskArr', JSON.stringify(tasks));
-  renderTask(tasks, Trash, Check);
-}
+  renderTask(tasks, icons);
+};
 
-export { saveTaskArr, checkIndex, updateIndex, tasksChecker, renderTask, addTask, addNewTask, clearCompleted }; // eslint-disable-line
+const addEventListeners = (icons) => {
+  const taskInput = document.getElementById('input-field');
+  const enterBtn = document.getElementById('btn-enter');
+
+  taskInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      if (taskInput.value !== '') {
+        addNewTask(taskInput, icons);
+      }
+    }
+  });
+
+  enterBtn.addEventListener('click', () => {
+    if (taskInput.value !== '') {
+      addNewTask(taskInput, icons);
+    }
+  });
+
+  const listInput = document.getElementById('list-input');
+
+  taskInput.addEventListener('focus', () => {
+    listInput.classList.add('focus');
+  });
+
+  taskInput.addEventListener('blur', () => {
+    listInput.classList.remove('focus');
+  });
+
+  const listClear = document.getElementById('list-clear');
+  listClear.addEventListener('click', () => {
+    clearCompleted(icons);
+  });
+};
+
+export { saveTaskArr, checkIndex, updateIndex, tasksChecker, renderTask, addTask, addNewTask, clearCompleted, createMainSection, addEventListeners }; // eslint-disable-line
