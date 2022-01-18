@@ -1,18 +1,17 @@
+function checkBox(tasks, index, state) {
+  for (let i = 0; i < tasks.length; i += 1) {
+    if (tasks[i].index === index) {
+      tasks[i].completed = state;
+      localStorage.setItem('taskArr', JSON.stringify(tasks));
+    }
+  }
+}
+
 export function editCompleted(box, tasks, index) {
   if (box.checked) {
-    for (let i = 0; i < tasks.length; i += 1) {
-      if (tasks[i].index === index) {
-        tasks[i].completed = true;
-        localStorage.setItem('taskArr', JSON.stringify(tasks));
-      }
-    }
+    checkBox(tasks, index, true);
   } else {
-    for (let i = 0; i < tasks.length; i += 1) {
-      if (tasks[i].index === index) {
-        tasks[i].completed = false;
-        localStorage.setItem('taskArr', JSON.stringify(tasks));
-      }
-    }
+    checkBox(tasks, index, false);
   }
 }
 
