@@ -61,6 +61,7 @@ const tasksChecker = () => {
 };
 
 const filterTax = (tasks, index) => {
+  console.log(`I'm trying to filter -------------`)
   const removing = tasks.filter((task) => task.index !== index);
   return removing;
 };

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.3% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>42/46</span>
+                <span class='fraction'>53/53</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">88.88% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>8/9</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.11% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>41/45</span>
+                <span class='fraction'>51/51</span>
             </div>
         
             
@@ -132,7 +132,17 @@
 <a name='L67'></a><a href='#L67'>67</a>
 <a name='L68'></a><a href='#L68'>68</a>
 <a name='L69'></a><a href='#L69'>69</a>
-<a name='L70'></a><a href='#L70'>70</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -196,13 +206,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
-  saveTaskArr, resetCompleted, getTasks, filterTax, reRender,addRemoveListeners,completed
+  saveTaskArr, resetCompleted, getTasks, reRender, addRemoveListeners, completed
 } from './isolated_functions';
 &nbsp;
 const listHTML = (index, icons) =&gt; {
@@ -242,13 +262,13 @@ const renderTask = (tasks, icons) =&gt; {
 const displayTasks = (input, tasks, icons) =&gt; {
   const listDiv = document.getElementById('list');
   listDiv.innerHTML = '';
-  
+&nbsp;
   renderTask(tasks, icons);
   input.value = null;
-  console.log('ul-----------------------',listDiv)
+  console.log('ul-----------------------', listDiv)
 };
 const addNewTask = (taskInput, icons) =&gt; {
-  if(taskInput.value==='') return
+  if (taskInput.value === '') return
   const tasks = getTasks();
   const newIndex = tasks.length + 1;
   const task = {
@@ -258,18 +278,28 @@ const addNewTask = (taskInput, icons) =&gt; {
   };
   tasks.push(task);
   saveTaskArr(tasks);
-  console.log('tasks',tasks)
+  console.log('tasks', tasks)
   resetCompleted();
   displayTasks(taskInput, tasks, icons);
-  
+&nbsp;
 };
 &nbsp;
-const removeTask = <span class="fstat-no" title="function not covered" >(f</span>ixIndex, icons, add) =&gt; {
-  let tasks = <span class="cstat-no" title="statement not covered" >getTasks();</span>
-<span class="cstat-no" title="statement not covered" >  tasks = filterTax(tasks, fixIndex);</span>
-<span class="cstat-no" title="statement not covered" >  saveTaskArr(tasks);</span>
-<span class="cstat-no" title="statement not covered" >  reRender(tasks, icons, add);</span>
+const filterTax = (tasks, index) =&gt; {
+  const removing = tasks.filter((task) =&gt; task.index !== index);
+  console.log('array after filter ' + removing)
+  return removing;
 };
+&nbsp;
+const removeTask = (fixIndex, icons, add) =&gt; {
+  let tasks = getTasks();
+  console.log('the task array is ' + tasks);
+  tasks = filterTax(tasks, fixIndex);
+  saveTaskArr(tasks);
+  console.log('the tasks I saved was ' + tasks)
+  reRender(tasks, icons, add);
+};
+&nbsp;
+&nbsp;
 export { addNewTask, removeTask };</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -277,7 +307,7 @@ export { addNewTask, removeTask };</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Jan 19 2022 16:32:24 GMT+0300 (East Africa Time)
+                at Wed Jan 19 2022 10:39:00 GMT-0400 (Venezuela Time)
             </div>
         <script src="prettify.js"></script>
         <script>

@@ -1,5 +1,5 @@
 import {
-  saveTaskArr, resetCompleted, getTasks, filterTax, reRender,addRemoveListeners,completed
+  saveTaskArr, resetCompleted, getTasks, reRender, addRemoveListeners, completed
 } from './isolated_functions';
 
 const listHTML = (index, icons) => {
@@ -39,13 +39,13 @@ const renderTask = (tasks, icons) => {
 const displayTasks = (input, tasks, icons) => {
   const listDiv = document.getElementById('list');
   listDiv.innerHTML = '';
-  
+
   renderTask(tasks, icons);
   input.value = null;
-  console.log('ul-----------------------',listDiv)
+  console.log('ul-----------------------', listDiv)
 };
 const addNewTask = (taskInput, icons) => {
-  if(taskInput.value==='') return
+  if (taskInput.value === '') return
   const tasks = getTasks();
   const newIndex = tasks.length + 1;
   const task = {
@@ -55,16 +55,26 @@ const addNewTask = (taskInput, icons) => {
   };
   tasks.push(task);
   saveTaskArr(tasks);
-  console.log('tasks',tasks)
+  console.log('tasks', tasks)
   resetCompleted();
   displayTasks(taskInput, tasks, icons);
-  
+
+};
+
+const filterTax = (tasks, index) => {
+  const removing = tasks.filter((task) => task.index !== index);
+  console.log('array after filter ' + removing)
+  return removing;
 };
 
 const removeTask = (fixIndex, icons, add) => {
   let tasks = getTasks();
+  console.log('the task array is ' + tasks);
   tasks = filterTax(tasks, fixIndex);
   saveTaskArr(tasks);
+  console.log('the tasks I saved was ' + tasks)
   reRender(tasks, icons, add);
 };
+
+
 export { addNewTask, removeTask };
