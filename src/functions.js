@@ -157,7 +157,7 @@ const addTask = (task, index, icons) => {
   inputField.addEventListener('blur', () => {
     if (inputField.value === '') {
       let tasks = JSON.parse(localStorage.getItem('taskArr'));
-      tasks = removeTask(tasks, fixIndex);
+      tasks = removeTask(tasks);
       saveTaskArr(tasks);
       const listDiv = document.getElementById('list');
       listDiv.innerHTML = '';
@@ -251,4 +251,4 @@ const addEventListeners = (icons) => {
   });
 };
 
-export { saveTaskArr, updateIndex, tasksChecker, renderTask, addTask, addNewTask, clearCompleted, createMainSection, addEventListeners }; // eslint-disable-line
+export {resetCompleted,getTasks,displayTasks, saveTaskArr, updateIndex, tasksChecker, renderTask, addTask, addNewTask, clearCompleted, createMainSection, addEventListeners }; // eslint-disable-line
