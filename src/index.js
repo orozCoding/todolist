@@ -6,8 +6,6 @@ createMainSection();
 window.addEventListener('load', () => {
   tasksChecker();
   renderTask(tasks, icons);
-  saveTaskArr(tasks);
-  checkIndex();
 });
 
 addEventListeners(icons);

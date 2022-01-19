@@ -42,7 +42,7 @@ const saveTaskArr = (tasks) => {
   updateIndex(tasks);
   localStorage.setItem('taskArr', JSON.stringify(tasks));
 };
-
+/*
 const checkIndex = () => {
   if (localStorage.getItem('taskArr')) {
     const newArr = JSON.parse(localStorage.getItem('taskArr'));
@@ -52,6 +52,7 @@ const checkIndex = () => {
     localStorage.setItem('index', '1');
   }
 };
+*/
 
 const tasksChecker = () => {
   if (localStorage.getItem('taskArr')) {
@@ -64,9 +65,6 @@ const tasksChecker = () => {
 
 const removeTask = (tasks, index) => {
   const removing = tasks.filter((task) => task.index !== index);
-  const currentIndex = localStorage.getItem('index', index);
-  const newIndex = currentIndex - 1;
-  localStorage.setItem('index', newIndex);
   return removing;
 };
 
@@ -95,37 +93,59 @@ const resetCompleted = () => {
   }
 };
 
-const addTask = (task, index, icons) => {
+const listHTML = (index, icons) => {
   const { Trash, Check } = icons;
-  const listUl = document.getElementById('list');
+  const html = `<input type="checkbox" id="cb-${index}" class="task-cb">
+  <input id="input-${index}" type="text" class="task-info">
+  <img id="check-${index}" src="${Check}" alt="Check Icon" class="click d-off">
+  <img id="remove-${index}" src="${Trash}" alt="Remove Icon" class="click">`;
+  return html;
+};
+
+const createTask = (index, icons) => {
   const newTask = document.createElement('li');
   newTask.id = `task-${index}`;
   newTask.classList.add('task-container', 'd-flex', 'row');
-  newTask.innerHTML = `<input type="checkbox" id="cb-${index}" class="task-cb">
-    <input id="input-${index}" type="text" class="task-info">
-    <img id="check-${index}" src="${Check}" alt="Check Icon" class="click d-off">
-    <img id="remove-${index}" src="${Trash}" alt="Remove Icon" class="click">`;
+  newTask.innerHTML = listHTML(index, icons);
+  return newTask;
+};
+
+const appendTask = (index, icons) => {
+  const listUl = document.getElementById('list');
+  const newTask = createTask(index, icons);
   listUl.appendChild(newTask);
-  const input = document.getElementById(`input-${index}`);
-  input.value = task.description;
+};
+
+const reRender = (tasks, icons, add) => {
+  const listDiv = document.getElementById('list');
+  listDiv.innerHTML = '';
+  tasks.sort((a, b) => a.index - b.index);
+  index = 1;
+  tasks.forEach((task) => {
+    add(task, index, icons);
+    index += 1;
+  });
+  completed();
+  resetCompleted();
+};
+
+const addRemoveListeners = (index, icons, add) => {
   const remove = document.getElementById(`remove-${index}`);
   const fixIndex = index;
   remove.addEventListener('click', () => {
-    let tasks = JSON.parse(localStorage.getItem('taskArr'));
+    let tasks = getTasks();
     tasks = removeTask(tasks, fixIndex);
     saveTaskArr(tasks);
-    const listDiv = document.getElementById('list');
-    listDiv.innerHTML = '';
-    tasks.sort((a, b) => a.index - b.index);
-    index = 1;
-    tasks.forEach((task) => {
-      addTask(task, index, icons);
-      index += 1;
-    });
-    completed();
-    resetCompleted();
+    reRender(tasks, icons, add);
   });
+};
+
+const addTask = (task, index, icons) => {
+  appendTask(index, icons);
+  addRemoveListeners(index, icons, addTask);
+
   const inputField = document.getElementById(`input-${index}`);
+  inputField.value = task.description;
   const taskContainer = document.getElementById(`task-${index}`);
   const checkImg = document.getElementById(`check-${index}`);
   const box = document.getElementById(`cb-${index}`);
@@ -157,7 +177,6 @@ const addTask = (task, index, icons) => {
 };
 
 const renderTask = (tasks, icons) => {
-  tasks.sort((a, b) => a.index - b.index);
   index = 1;
   tasks.forEach((task) => {
     addTask(task, index, icons);
@@ -165,26 +184,27 @@ const renderTask = (tasks, icons) => {
   });
   completed();
   resetCompleted();
-  updateIndex(tasks);
+};
+
+const displayTasks = (input, tasks, icons) => {
+  const listDiv = document.getElementById('list');
+  listDiv.innerHTML = '';
+  renderTask(tasks, icons);
+  input.value = null;
 };
 
 const addNewTask = (taskInput, icons) => {
-  const newIndex = localStorage.getItem('index');
+  const tasks = getTasks();
+  const newIndex = tasks.length + 1;
   const task = {
     description: taskInput.value,
     completed: false,
     index: newIndex,
   };
-  const tasks = getTasks();
   tasks.push(task);
   saveTaskArr(tasks);
   resetCompleted();
-  checkIndex();
-  const listDiv = document.getElementById('list');
-  listDiv.innerHTML = '';
-  renderTask(tasks, icons);
-  checkIndex();
-  taskInput.value = null;
+  displayTasks(taskInput, tasks, icons);
 };
 
 const clearCompleted = (icons) => {
@@ -231,4 +251,4 @@ const addEventListeners = (icons) => {
   });
 };
 
-export { saveTaskArr, checkIndex, updateIndex, tasksChecker, renderTask, addTask, addNewTask, clearCompleted, createMainSection, addEventListeners }; // eslint-disable-line
+export { saveTaskArr, updateIndex, tasksChecker, renderTask, addTask, addNewTask, clearCompleted, createMainSection, addEventListeners }; // eslint-disable-line
