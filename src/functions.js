@@ -7,7 +7,10 @@ import Check from './check.svg';
 export let tasks = []; // eslint-disable-line
 
 export const icons = {
-  Load, Trash, Enter, Check,
+  Load,
+  Trash,
+  Enter,
+  Check,
 };
 let index = 1;
 
@@ -191,7 +194,7 @@ const renderTask = (tasks, icons) => {
 };
 
 const displayTasks = (input, tasks, icons) => {
-  const listDiv = document.getElementById('list');
+  const listDiv = document.getElementByInpd('list');
   listDiv.innerHTML = '';
   renderTask(tasks, icons);
   input.value = null;
@@ -255,4 +258,19 @@ const addEventListeners = (icons) => {
   });
 };
 
-export {resetCompleted,getTasks,displayTasks, saveTaskArr, updateIndex, tasksChecker, renderTask, addTask, addNewTask, clearCompleted, createMainSection, addEventListeners }; // eslint-disable-line
+export {
+  resetCompleted,
+  getTasks,
+  displayTasks,
+  saveTaskArr,
+  updateIndex,
+  tasksChecker,
+  renderTask,
+  addTask,
+  addNewTask,
+  clearCompleted,
+  createMainSection,
+  addEventListeners,
+  filterTax,
+  reRender,
+}; // eslint-disable-line
