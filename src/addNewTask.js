@@ -1,5 +1,5 @@
 import {
-  saveTaskArr, resetCompleted, getTasks, reRender, addRemoveListeners, completed
+  saveTaskArr, resetCompleted, getTasks, addRemoveListeners, completed
 } from './isolated_functions';
 
 const listHTML = (index, icons) => {
@@ -42,7 +42,7 @@ const displayTasks = (input, tasks, icons) => {
 
   renderTask(tasks, icons);
   input.value = null;
-  console.log('ul-----------------------', listDiv)
+  
 };
 const addNewTask = (taskInput, icons) => {
   if (taskInput.value === '') return
@@ -55,10 +55,23 @@ const addNewTask = (taskInput, icons) => {
   };
   tasks.push(task);
   saveTaskArr(tasks);
-  console.log('tasks', tasks)
+  
   resetCompleted();
   displayTasks(taskInput, tasks, icons);
 
+};
+
+const reRender = (tasks, icons, add) => {
+  const listDiv = document.getElementById('list');
+  listDiv.innerHTML = '';
+  
+  let index = 1;
+  tasks.forEach((task) => {
+    add(task, index, icons);
+    index += 1;
+  });
+  completed();
+  resetCompleted();
 };
 
 const filterTax = (tasks, index) => {
@@ -69,11 +82,16 @@ const filterTax = (tasks, index) => {
 
 const removeTask = (fixIndex, icons, add) => {
   let tasks = getTasks();
-  console.log('the task array is ' + tasks);
   tasks = filterTax(tasks, fixIndex);
+  console.log('tasks length',tasks.length,'------------------------------');
   saveTaskArr(tasks);
-  console.log('the tasks I saved was ' + tasks)
-  reRender(tasks, icons, add);
+  const listDiv = document.querySelector('#list');
+  console.log('listDiv',listDiv)
+  listDiv.innerHTML = '';
+
+  renderTask(tasks,icons)
+  
+  
 };
 
 

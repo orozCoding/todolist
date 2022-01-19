@@ -1,12 +1,21 @@
 /**
  * @jest-environment jsdom
  */
-import { expect, jest, beforeAll } from '@jest/globals'
+import { expect, jest, beforeEach } from '@jest/globals'
 import { addNewTask, removeTask } from '../src/addNewTask'
 import { getTasks } from '../src/isolated_functions'
 
 jest.mock('../src/isolated_functions')
 
+beforeEach(()=>{
+  document.body.innerHTML = `
+  <input type="text" id="input-field" placeholder="Add to your list...">
+  <ul id="list" class="d-flex">
+  <li>Helloooo</li>
+  <li>Hey</li>
+  </ul>
+   `
+})
 
 describe('addNewTask', () => {
 
@@ -32,7 +41,7 @@ describe('addNewTask', () => {
     taskInput.value = ''
     addNewTask(taskInput, icons);
     const list = document.querySelectorAll('#list li')
-    expect(list).toHaveLength(1)
+    expect(list).toHaveLength(2)
   })
   it('should add a task', () => {
     taskInput.value = 'hey'
@@ -44,6 +53,7 @@ describe('addNewTask', () => {
 
 describe('removeTask', () => {
   
+  
   const icons = {
     Load: '',
     Trash: '',
@@ -52,10 +62,12 @@ describe('removeTask', () => {
   }  
   
   it('should remove second task', () => {
-    const list = document.querySelectorAll('#list li')
-    let add = 'addTask';
+  
+   let add = jest.fn();
    
-    removeTask(1, icons, add);    
-    expect(list).toHaveLength(2);
+   removeTask(1, icons, add); 
+   
+   const list = document.querySelectorAll('#list li')
+    expect(list).toHaveLength(1);
   })
 });

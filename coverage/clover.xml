@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1642603140150" clover="3.2.0">
-  <project timestamp="1642603140150" name="All files">
-    <metrics statements="229" coveredstatements="74" conditionals="22" coveredconditionals="2" methods="51" coveredmethods="11" elements="302" coveredelements="87" complexity="0" loc="229" ncloc="229" packages="1" files="3" classes="3"/>
-    <file name="addNewTask.js" path="C:\git\repos\newtests\todolist\src\addNewTask.js">
-      <metrics statements="51" coveredstatements="51" conditionals="2" coveredconditionals="2" methods="11" coveredmethods="11"/>
+<coverage generated="1642605251442" clover="3.2.0">
+  <project timestamp="1642605251442" name="All files">
+    <metrics statements="238" coveredstatements="75" conditionals="22" coveredconditionals="2" methods="53" coveredmethods="11" elements="313" coveredelements="88" complexity="0" loc="238" ncloc="238" packages="1" files="3" classes="3"/>
+    <file name="addNewTask.js" path="D:\projects\patners\todolist\src\addNewTask.js">
+      <metrics statements="60" coveredstatements="52" conditionals="2" coveredconditionals="2" methods="13" coveredmethods="11"/>
       <line num="5" count="1" type="stmt"/>
-      <line num="6" count="3" type="stmt"/>
-      <line num="7" count="3" type="stmt"/>
-      <line num="11" count="3" type="stmt"/>
+      <line num="6" count="4" type="stmt"/>
+      <line num="7" count="4" type="stmt"/>
+      <line num="11" count="4" type="stmt"/>
       <line num="13" count="1" type="stmt"/>
-      <line num="14" count="3" type="stmt"/>
-      <line num="15" count="3" type="stmt"/>
-      <line num="16" count="3" type="stmt"/>
-      <line num="17" count="3" type="stmt"/>
-      <line num="18" count="3" type="stmt"/>
+      <line num="14" count="4" type="stmt"/>
+      <line num="15" count="4" type="stmt"/>
+      <line num="16" count="4" type="stmt"/>
+      <line num="17" count="4" type="stmt"/>
+      <line num="18" count="4" type="stmt"/>
       <line num="20" count="1" type="stmt"/>
-      <line num="21" count="3" type="stmt"/>
-      <line num="22" count="3" type="stmt"/>
-      <line num="23" count="3" type="stmt"/>
+      <line num="21" count="4" type="stmt"/>
+      <line num="22" count="4" type="stmt"/>
+      <line num="23" count="4" type="stmt"/>
       <line num="26" count="1" type="stmt"/>
-      <line num="27" count="3" type="stmt"/>
-      <line num="28" count="3" type="stmt"/>
+      <line num="27" count="4" type="stmt"/>
+      <line num="28" count="4" type="stmt"/>
       <line num="30" count="1" type="stmt"/>
-      <line num="31" count="1" type="stmt"/>
-      <line num="32" count="1" type="stmt"/>
-      <line num="33" count="3" type="stmt"/>
-      <line num="34" count="3" type="stmt"/>
-      <line num="36" count="1" type="stmt"/>
-      <line num="37" count="1" type="stmt"/>
+      <line num="31" count="2" type="stmt"/>
+      <line num="32" count="2" type="stmt"/>
+      <line num="33" count="4" type="stmt"/>
+      <line num="34" count="4" type="stmt"/>
+      <line num="36" count="2" type="stmt"/>
+      <line num="37" count="2" type="stmt"/>
       <line num="39" count="1" type="stmt"/>
       <line num="40" count="1" type="stmt"/>
       <line num="41" count="1" type="stmt"/>
       <line num="43" count="1" type="stmt"/>
       <line num="44" count="1" type="stmt"/>
-      <line num="45" count="1" type="stmt"/>
       <line num="47" count="1" type="stmt"/>
       <line num="48" count="2" type="cond" truecount="2" falsecount="0"/>
       <line num="49" count="1" type="stmt"/>
@@ -41,22 +40,32 @@
       <line num="51" count="1" type="stmt"/>
       <line num="56" count="1" type="stmt"/>
       <line num="57" count="1" type="stmt"/>
-      <line num="58" count="1" type="stmt"/>
       <line num="59" count="1" type="stmt"/>
       <line num="60" count="1" type="stmt"/>
       <line num="64" count="1" type="stmt"/>
-      <line num="65" count="2" type="stmt"/>
-      <line num="66" count="1" type="stmt"/>
-      <line num="67" count="1" type="stmt"/>
-      <line num="70" count="1" type="stmt"/>
-      <line num="71" count="1" type="stmt"/>
-      <line num="72" count="1" type="stmt"/>
-      <line num="73" count="1" type="stmt"/>
-      <line num="74" count="1" type="stmt"/>
-      <line num="75" count="1" type="stmt"/>
-      <line num="76" count="1" type="stmt"/>
+      <line num="65" count="0" type="stmt"/>
+      <line num="66" count="0" type="stmt"/>
+      <line num="68" count="0" type="stmt"/>
+      <line num="69" count="0" type="stmt"/>
+      <line num="70" count="0" type="stmt"/>
+      <line num="71" count="0" type="stmt"/>
+      <line num="73" count="0" type="stmt"/>
+      <line num="74" count="0" type="stmt"/>
+      <line num="77" count="1" type="stmt"/>
+      <line num="78" count="2" type="stmt"/>
+      <line num="79" count="1" type="stmt"/>
+      <line num="80" count="1" type="stmt"/>
+      <line num="83" count="1" type="stmt"/>
+      <line num="84" count="1" type="stmt"/>
+      <line num="85" count="1" type="stmt"/>
+      <line num="86" count="1" type="stmt"/>
+      <line num="87" count="1" type="stmt"/>
+      <line num="88" count="1" type="stmt"/>
+      <line num="89" count="1" type="stmt"/>
+      <line num="90" count="1" type="stmt"/>
+      <line num="92" count="1" type="stmt"/>
     </file>
-    <file name="completed.js" path="C:\git\repos\newtests\todolist\src\completed.js">
+    <file name="completed.js" path="D:\projects\patners\todolist\src\completed.js">
       <metrics statements="22" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="4" coveredmethods="0"/>
       <line num="2" count="0" type="stmt"/>
       <line num="3" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -81,7 +90,7 @@
       <line num="34" count="0" type="stmt"/>
       <line num="35" count="0" type="stmt"/>
     </file>
-    <file name="isolated_functions.js" path="C:\git\repos\newtests\todolist\src\isolated_functions.js">
+    <file name="isolated_functions.js" path="D:\projects\patners\todolist\src\isolated_functions.js">
       <metrics statements="156" coveredstatements="23" conditionals="14" coveredconditionals="0" methods="36" coveredmethods="0"/>
       <line num="3" count="1" type="stmt"/>
       <line num="5" count="1" type="stmt"/>
