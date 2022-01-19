@@ -63,7 +63,7 @@ const tasksChecker = () => {
   }
 };
 
-const removeTask = (tasks, index) => {
+const filterTax = (tasks, index) => {
   const removing = tasks.filter((task) => task.index !== index);
   return removing;
 };
@@ -129,14 +129,18 @@ const reRender = (tasks, icons, add) => {
   resetCompleted();
 };
 
+const removeTask = (fixIndex, icons, add) => {
+  let tasks = getTasks();
+  tasks = filterTax(tasks, fixIndex);
+  saveTaskArr(tasks);
+  reRender(tasks, icons, add);
+};
+
 const addRemoveListeners = (index, icons, add) => {
   const remove = document.getElementById(`remove-${index}`);
   const fixIndex = index;
   remove.addEventListener('click', () => {
-    let tasks = getTasks();
-    tasks = removeTask(tasks, fixIndex);
-    saveTaskArr(tasks);
-    reRender(tasks, icons, add);
+    removeTask(fixIndex, icons, add);
   });
 };
 
@@ -157,7 +161,7 @@ const addTask = (task, index, icons) => {
   inputField.addEventListener('blur', () => {
     if (inputField.value === '') {
       let tasks = JSON.parse(localStorage.getItem('taskArr'));
-      tasks = removeTask(tasks);
+      tasks = filterTax(tasks);
       saveTaskArr(tasks);
       const listDiv = document.getElementById('list');
       listDiv.innerHTML = '';
