@@ -1,4 +1,4 @@
-import { editTask,updateCompleted, clearCompleted } from '../test_env/editCompleteClear';
+import { editTask, updateCompleted, clearCompleted } from '../test_env/editCompleteClear';
 import { html2, icons, tasks2 } from '../test_env/html';
 import { addTask } from '../src/theFunctions';
 
@@ -22,7 +22,6 @@ describe('Testing task editing', () => {
     expect(tasksList).toHaveLength(2);
   });
 });
-
 
 describe('Testing completed check', () => {
   test('should edit first task complete status', () => {
