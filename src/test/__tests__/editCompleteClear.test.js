@@ -2,6 +2,7 @@ const { editTask, updateCompleted, clearCompleted } = require('../editCompleteCl
 const {
   html2, icons, tasks2,
 } = require('../html');
+const { addTask } = require('../theFunctions');
 
 localStorage.setItem('taskArr', JSON.stringify(tasks2));
 
@@ -10,7 +11,7 @@ describe('Testing task editing', () => {
     document.body.innerHTML = html2;
     const inputField = document.getElementById('input-1');
     inputField.value = 'It is working';
-    editTask(inputField, 1, icons);
+    editTask(inputField, 1, icons, addTask);
     const finalMsg = inputField.value;
     expect(finalMsg).toBe('It is working');
   });
@@ -18,7 +19,7 @@ describe('Testing task editing', () => {
   test('should remove empty task', () => {
     const inputField = document.getElementById('input-3');
     inputField.value = '';
-    editTask(inputField, 3, icons);
+    editTask(inputField, 3, icons, addTask);
     const tasksList = document.querySelectorAll('#list li');
     expect(tasksList).toHaveLength(2);
   });

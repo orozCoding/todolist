@@ -1,9 +1,9 @@
 const {
-  saveTaskArr, addTask, completed, changeContent, updateIndex,
+  saveTaskArr, completed, changeContent, updateIndex,
   editCompleted, renderTask, getTasks, filterTasks,
 } = require('./theFunctions');
 
-const editTask = (inputField, index, icons) => {
+const editTask = (inputField, index, icons, add) => {
   if (inputField.value === '') {
     let tasks = JSON.parse(localStorage.getItem('taskArr'));
     tasks = filterTasks(tasks, index);
@@ -13,7 +13,7 @@ const editTask = (inputField, index, icons) => {
     tasks.sort((a, b) => a.index - b.index);
     index = 1;
     tasks.forEach((task) => {
-      addTask(task, index, icons);
+      add(task, index, icons);
       index += 1;
     });
     completed();

@@ -95,7 +95,7 @@ const resetCompleted = () => {
   }
 };
 
-const removeTask = (index, icons) => {
+const removeTask = (index, icons, add) => {
   let tasks = JSON.parse(localStorage.getItem('taskArr'));
   tasks = filterTasks(tasks, index);
   saveTaskArr(tasks);
@@ -104,14 +104,14 @@ const removeTask = (index, icons) => {
   tasks.sort((a, b) => a.index - b.index);
   index = 1;
   tasks.forEach((task) => {
-    addTask(task, index, icons);
+    add(task, index, icons);
     index += 1;
   });
   completed();
   resetCompleted();
 };
 
-const editTask = (inputField, index) => {
+const editTask = (inputField, index, add) => {
   if (inputField.value === '') {
     let tasks = JSON.parse(localStorage.getItem('taskArr'));
     tasks = filterTasks(tasks, index);
@@ -121,7 +121,7 @@ const editTask = (inputField, index) => {
     tasks.sort((a, b) => a.index - b.index);
     index = 1;
     tasks.forEach((task) => {
-      addTask(task, index, icons);
+      add(task, index, icons);
       index += 1;
     });
     completed();
@@ -152,7 +152,7 @@ const addTask = (task, index, icons) => {
   const remove = document.getElementById(`remove-${index}`);
   const fixIndex = index;
   remove.addEventListener('click', () => {
-    removeTask(fixIndex, icons);
+    removeTask(fixIndex, icons, addTask);
   });
   const inputField = document.getElementById(`input-${index}`);
   const taskContainer = document.getElementById(`task-${index}`);
@@ -164,7 +164,7 @@ const addTask = (task, index, icons) => {
     box.setAttribute('disabled', 'disabled');
   });
   inputField.addEventListener('blur', () => {
-    editTask(inputField, fixIndex);
+    editTask(inputField, fixIndex, addTask);
   });
 };
 
@@ -243,4 +243,7 @@ const addEventListeners = (icons) => {
   });
 };
 
-export { saveTaskArr, checkIndex, updateIndex, tasksChecker, renderTask, addTask, addNewTask, clearCompleted, createMainSection, addEventListeners }; // eslint-disable-line
+export {
+  saveTaskArr, checkIndex, updateIndex, tasksChecker,
+  renderTask, addTask, addNewTask, clearCompleted, createMainSection, addEventListeners,
+}; // eslint-disable-line

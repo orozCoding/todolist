@@ -1,5 +1,5 @@
 const {
-  getTasks, saveTaskArr, resetCompleted, checkIndex, renderTask, filterTasks, addTask, completed,
+  getTasks, saveTaskArr, resetCompleted, checkIndex, renderTask, filterTasks, completed,
 } = require('./theFunctions');
 
 function addNewTask(taskInput, icons) {
@@ -20,7 +20,7 @@ function addNewTask(taskInput, icons) {
   taskInput.value = null;
 }
 
-function removeTask(index, icons) {
+function removeTask(index, icons, add) {
   let tasks = JSON.parse(localStorage.getItem('taskArr'));
   tasks = filterTasks(tasks, index);
   saveTaskArr(tasks);
@@ -29,7 +29,7 @@ function removeTask(index, icons) {
   tasks.sort((a, b) => a.index - b.index);
   index = 1;
   tasks.forEach((task) => {
-    addTask(task, index, icons);
+    add(task, index, icons);
     index += 1;
   });
   completed();
