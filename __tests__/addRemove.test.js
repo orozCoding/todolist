@@ -1,5 +1,5 @@
 import { addNewTask, removeTask } from '../test_env/addRemove';
-import { html, icons,tasks } from '../test_env/html';
+import { html, icons, tasks } from '../test_env/html';
 import { addTask } from '../src/theFunctions';
 
 localStorage.setItem('taskArr', JSON.stringify(tasks));
@@ -44,5 +44,4 @@ describe('testing removeTask', () => {
     const firstInput = document.querySelector('#input-1');
     expect(firstInput.value).toBe('Second task');
   });
- 
 });
