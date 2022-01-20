@@ -26,3 +26,12 @@ describe('testing addTask', () => {
     expect(tasksList).toHaveLength(5);
   });
 });
+
+describe('testing removeTask', () => {
+  test('should recognize tasks', () => {
+    const tasksList = document.querySelectorAll('#list li');
+    expect(tasksList).toHaveLength(5);
+  });
+
+ 
+});
