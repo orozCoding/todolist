@@ -33,5 +33,16 @@ describe('testing removeTask', () => {
     expect(tasksList).toHaveLength(5);
   });
 
+  test('should remove a task', () => {
+    removeTask(5, icons, addTask);
+    const tasksList = document.querySelectorAll('#list li');
+    expect(tasksList).toHaveLength(4);
+  });
+
+  test('should remove the first task', () => {
+    removeTask(1, icons, addTask);
+    const firstInput = document.querySelector('#input-1');
+    expect(firstInput.value).toBe('Second task');
+  });
  
 });
