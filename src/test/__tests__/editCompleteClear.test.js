@@ -1,11 +1,3 @@
-/*
-const { editTask, updateCompleted, clearCompleted } = require('../editCompleteClear');
-const {
-  html2, icons, tasks2,
-} = require('../html');
-const { addTask } = require('../theFunctions');
-*/
-
 import { editTask, updateCompleted, clearCompleted } from '../editCompleteClear';
 import { html2, icons, tasks2 } from '../html';
 import { addTask } from '../theFunctions';

@@ -1,5 +1,7 @@
-import { saveTaskArr, completed, changeContent, updateIndex,
-  editCompleted, renderTask, getTasks, filterTasks } from './theFunctions';
+import {
+  saveTaskArr, completed, changeContent, updateIndex,
+  editCompleted, renderTask, getTasks, filterTasks,
+} from './theFunctions';
 
 const editTask = (inputField, index, icons, add) => {
   if (inputField.value === '') {

@@ -1,11 +1,3 @@
-/*
-const { addNewTask, removeTask } = require('../AddRemove');
-const {
-  html, icons, tasks,
-} = require('../html');
-const { addTask } = require('../theFunctions');
-*/
-
 import { addNewTask, removeTask } from '../AddRemove';
 import { html, icons, tasks } from '../html';
 import { addTask } from '../theFunctions';

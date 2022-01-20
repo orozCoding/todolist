@@ -52,4 +52,6 @@ const tasks2 = [
   { description: 'Forth task', completed: false, index: 3 },
 ];
 
-export { html, html2, icons, tasks, tasks2 }
+export {
+  html, html2, icons, tasks, tasks2,
+};
