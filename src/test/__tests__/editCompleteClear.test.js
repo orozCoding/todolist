@@ -49,3 +49,11 @@ describe('Testing completed check', () => {
     expect(tasks[0].completed).toBe(false);
   });
 });
+
+describe('Testing clear all', () => {
+  test('Should clear the checked ones', () => {
+    clearCompleted(icons);
+    const tasks = JSON.parse(localStorage.getItem('taskArr'));
+    expect(tasks).toHaveLength(1);
+  });
+});

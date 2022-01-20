@@ -4,10 +4,10 @@ const {
 } = require('../html.js');
 
 localStorage.setItem('taskArr', JSON.stringify(tasks));
+document.body.innerHTML = html;
 
 describe('testing addTask', () => {
   test('should recognize tasks', () => {
-    document.body.innerHTML = html;
     const tasksList = document.querySelectorAll('#list li');
     expect(tasksList).toHaveLength(3);
   });
@@ -35,7 +35,7 @@ describe('testing removeTask', () => {
     expect(tasksList).toHaveLength(5);
   });
 
-  test('should a task', () => {
+  test('should remove a task', () => {
     removeTask(5, icons);
     const tasksList = document.querySelectorAll('#list li');
     expect(tasksList).toHaveLength(4);
