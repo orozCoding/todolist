@@ -15,25 +15,28 @@ export function editCompleted(box, tasks, index) {
   }
 }
 
-export function completed() {
+const updateCompleted = (box, index) => {
   const tasks = JSON.parse(localStorage.getItem('taskArr'));
-  const boxes = document.querySelectorAll('.task-cb');
+  const container = document.getElementById(`task-${index}`);
+  const input = document.getElementById(`input-${index}`);
+  if (box.checked) {
+    container.classList.add('completed');
+    input.style.backgroundColor = 'lightgray';
+    input.setAttribute('disabled', 'disabled');
+    editCompleted(box, tasks, index);
+  } else {
+    container.classList.remove('completed');
+    input.style.backgroundColor = '';
+    input.removeAttribute('disabled');
+    editCompleted(box, tasks, index);
+  }
+};
 
+export function completed() {
+  const boxes = document.querySelectorAll('.task-cb');
   for (let i = 0, x = 1; i < boxes.length; i += 1, x += 1) {
-    const container = document.getElementById(`task-${x}`);
-    const input = document.getElementById(`input-${x}`);
     boxes[i].addEventListener('click', () => {
-      if (boxes[i].checked) {
-        container.classList.add('completed');
-        input.style.backgroundColor = 'lightgray';
-        input.setAttribute('disabled', 'disabled');
-        editCompleted(boxes[i], tasks, x);
-      } else {
-        container.classList.remove('completed');
-        input.style.backgroundColor = '';
-        input.removeAttribute('disabled');
-        editCompleted(boxes[i], tasks, x);
-      }
+      updateCompleted(boxes[i], x);
     });
   }
 }
