@@ -1,6 +1,6 @@
 import {
   getTasks, saveTaskArr, resetCompleted, checkIndex, renderTask, filterTasks, completed,
-} from './theFunctions';
+} from '../src/theFunctions';
 
 function addNewTask(taskInput, icons) {
   const newIndex = localStorage.getItem('index');

@@ -1,6 +1,6 @@
-import { editTask, updateCompleted, clearCompleted } from '../editCompleteClear';
-import { html2, icons, tasks2 } from '../html';
-import { addTask } from '../theFunctions';
+import { editTask, updateCompleted, clearCompleted } from '../test_env/editCompleteClear';
+import { html2, icons, tasks2 } from '../test_env/html';
+import { addTask } from '../src/theFunctions';
 
 localStorage.setItem('taskArr', JSON.stringify(tasks2));
 

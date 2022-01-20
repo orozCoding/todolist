@@ -1,6 +1,6 @@
-import { addNewTask, removeTask } from '../AddRemove';
-import { html, icons, tasks } from '../html';
-import { addTask } from '../theFunctions';
+import { addNewTask, removeTask } from '../test_env/addRemove';
+import { html, icons, tasks } from '../test_env/html';
+import { addTask } from '../src/theFunctions';
 
 localStorage.setItem('taskArr', JSON.stringify(tasks));
 document.body.innerHTML = html;
