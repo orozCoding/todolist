@@ -1,5 +1,6 @@
 const {
-  saveTaskArr, addTask, completed, changeContent, updateIndex, editCompleted, renderTask, getTasks, filterTasks,
+  saveTaskArr, addTask, completed, changeContent, updateIndex,
+  editCompleted, renderTask, getTasks, filterTasks,
 } = require('./theFunctions');
 
 const editTask = (inputField, index, icons) => {

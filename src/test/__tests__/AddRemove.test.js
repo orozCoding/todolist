@@ -1,7 +1,7 @@
 const { addNewTask, removeTask } = require('../AddRemove');
 const {
   html, icons, tasks,
-} = require('../html.js');
+} = require('../html');
 
 localStorage.setItem('taskArr', JSON.stringify(tasks));
 document.body.innerHTML = html;

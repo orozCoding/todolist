@@ -118,7 +118,7 @@ const removeTask = (index, icons) => {
   resetCompleted();
 };
 
-const editTask = (inputField, index) => {
+const editTask = (inputField, index, icons) => {
   if (inputField.value === '') {
     let tasks = JSON.parse(localStorage.getItem('taskArr'));
     tasks = filterTasks(tasks, index);

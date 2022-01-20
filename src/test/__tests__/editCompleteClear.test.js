@@ -1,7 +1,7 @@
 const { editTask, updateCompleted, clearCompleted } = require('../editCompleteClear');
 const {
   html2, icons, tasks2,
-} = require('../html.js');
+} = require('../html');
 
 localStorage.setItem('taskArr', JSON.stringify(tasks2));
 
