@@ -1,6 +1,4 @@
-const {
-  getTasks, saveTaskArr, resetCompleted, checkIndex, renderTask, filterTasks, completed,
-} = require('./theFunctions');
+import { getTasks, saveTaskArr, resetCompleted, checkIndex, renderTask, filterTasks, completed } from './theFunctions'
 
 function addNewTask(taskInput, icons) {
   const newIndex = localStorage.getItem('index');
@@ -36,4 +34,4 @@ function removeTask(index, icons, add) {
   resetCompleted();
 }
 
-module.exports = { addNewTask, removeTask };
+export { addNewTask, removeTask };

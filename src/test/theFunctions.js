@@ -197,7 +197,7 @@ const clearCompleted = (icons) => {
   renderTask(tasks, icons);
 };
 
-module.exports = {
+export {
   checkIndex,
   saveTaskArr,
   resetCompleted,

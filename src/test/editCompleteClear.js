@@ -1,7 +1,5 @@
-const {
-  saveTaskArr, completed, changeContent, updateIndex,
-  editCompleted, renderTask, getTasks, filterTasks,
-} = require('./theFunctions');
+import { saveTaskArr, completed, changeContent, updateIndex,
+  editCompleted, renderTask, getTasks, filterTasks } from './theFunctions';
 
 const editTask = (inputField, index, icons, add) => {
   if (inputField.value === '') {
@@ -55,6 +53,4 @@ const clearCompleted = (icons) => {
   renderTask(tasks, icons);
 };
 
-module.exports = {
-  editTask, updateCompleted, clearCompleted,
-};
+export { editTask, updateCompleted, clearCompleted };
