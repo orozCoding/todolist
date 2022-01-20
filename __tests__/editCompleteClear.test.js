@@ -1,4 +1,4 @@
-import { editTask,updateCompleted  } from '../test_env/editCompleteClear';
+import { editTask,updateCompleted, clearCompleted } from '../test_env/editCompleteClear';
 import { html2, icons, tasks2 } from '../test_env/html';
 import { addTask } from '../src/theFunctions';
 
@@ -47,5 +47,13 @@ describe('Testing completed check', () => {
     updateCompleted(box, 1);
     const tasks = JSON.parse(localStorage.getItem('taskArr'));
     expect(tasks[0].completed).toBe(false);
+  });
+});
+
+describe('Testing clear all', () => {
+  test('Should clear the checked ones', () => {
+    clearCompleted(icons);
+    const tasks = JSON.parse(localStorage.getItem('taskArr'));
+    expect(tasks).toHaveLength(1);
   });
 });
