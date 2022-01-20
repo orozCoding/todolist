@@ -1,4 +1,4 @@
-import { editTask } from '../test_env/editCompleteClear';
+import { editTask,updateCompleted  } from '../test_env/editCompleteClear';
 import { html2, icons, tasks2 } from '../test_env/html';
 import { addTask } from '../src/theFunctions';
 
@@ -20,5 +20,32 @@ describe('Testing task editing', () => {
     editTask(inputField, 3, icons, addTask);
     const tasksList = document.querySelectorAll('#list li');
     expect(tasksList).toHaveLength(2);
+  });
+});
+
+
+describe('Testing completed check', () => {
+  test('should edit first task complete status', () => {
+    const box = document.getElementById('cb-1');
+    box.checked = true;
+    updateCompleted(box, 1);
+    const tasks = JSON.parse(localStorage.getItem('taskArr'));
+    expect(tasks[0].completed).toBe(true);
+  });
+
+  test('should edit second task complete status', () => {
+    const box = document.getElementById('cb-2');
+    box.checked = true;
+    updateCompleted(box, 2);
+    const tasks = JSON.parse(localStorage.getItem('taskArr'));
+    expect(tasks[1].completed).toBe(true);
+  });
+
+  test('should edit fisrt task complete status', () => {
+    const box = document.getElementById('cb-1');
+    box.checked = false;
+    updateCompleted(box, 1);
+    const tasks = JSON.parse(localStorage.getItem('taskArr'));
+    expect(tasks[0].completed).toBe(false);
   });
 });
